@@ -1,5 +1,5 @@
 ﻿from config import TradingConfig, FLIP_THRESHOLD, SAFETY_MARGIN, COOLDOWN
-from exchange_client import ExchangeClient
+from iexchange_client import IExchangeClient
 from order_tracker import OrderTracker, OrderThrottler
 from risk_manager import AdvancedRiskManager
 import logging
@@ -14,7 +14,7 @@ from monitor import TradingMonitor
 from position_controller_s1 import PositionControllerS1
 
 class GridTrader:
-    def __init__(self, exchange, config):
+    def __init__(self, exchange: IExchangeClient, config):
         """初始化网格交易器"""
         self.exchange = exchange
         self.config = config
@@ -749,7 +749,7 @@ class GridTrader:
             await self.exchange.close()
             
             # 重置关键状态
-            self.exchange = ExchangeClient()
+            self.exchange = IExchangeClient()
             self.order_tracker.reset()
             self.base_price = None
             self.highest = None

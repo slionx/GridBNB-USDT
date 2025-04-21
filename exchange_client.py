@@ -5,8 +5,9 @@ from config import SYMBOL, DEBUG_MODE, API_TIMEOUT, RECV_WINDOW
 from datetime import datetime
 import time
 import asyncio
+from iexchange_client import IExchangeClient
 
-class ExchangeClient:
+class ExchangeClient(IExchangeClient):
     def __init__(self):
         self.logger = logging.getLogger(self.__class__.__name__)
         self._verify_credentials()

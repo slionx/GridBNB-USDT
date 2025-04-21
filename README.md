@@ -75,6 +75,60 @@
     *   风险参数 (`MAX_DRAWDOWN`, `DAILY_LOSS_LIMIT`)
     *   波动率与网格对应关系 (`GRID_PARAMS['volatility_threshold']`)
 
+## 运行模式说明
+
+本项目支持三种运行模式，便于实盘、模拟盘和历史回测灵活切换：
+
+- **live（实盘）**：默认模式，直接连接币安API，真实下单。
+- **simulate（模拟盘）**：以实时行情为基础，所有下单、成交、账户变动均在本地虚拟账户中模拟，不与真实交易所交互，适合策略仿真和风控测试。
+- **backtest（回测）**：以本地历史K线/成交数据为行情源，完全离线模拟账户、撮合、风控等，适合策略历史复盘和参数优化。
+
+### 启动参数与环境变量
+
+可通过命令行参数或环境变量灵活切换模式和配置：
+
+- `--mode` 或 `TRADING_MODE`：选择运行模式（live/simulate/backtest）
+- `--kline` 或 `BACKTEST_KLINE_PATH`：回测模式下指定历史K线数据文件（JSON格式）
+- `--init-usdt`、`--init-bnb`：指定初始资金
+
+**示例：**
+
+```bash
+# 实盘模式（默认）
+python main.py
+
+# 模拟盘模式，初始资金10000 USDT
+python main.py --mode simulate --init-usdt 10000
+
+# 回测模式，指定K线文件和初始资金
+python3 main.py --mode backtest --kline bnbusdt_1h.json --init-usdt 5000 --init-bnb 5
+```
+
+## 回测数据准备与结果导出
+
+- 回测K线文件需为JSON数组格式，每行为 `[timestamp, open, high, low, close]`。
+- 回测结束后，可通过MockExchangeClient的 `export_trades_to_csv`、`export_trades_to_json`、`export_equity_curve_to_csv` 方法导出成交记录和资金曲线。
+- 默认导出文件为 `backtest_trades.csv`、`backtest_equity_curve.csv`，可在Web端"回测结果"卡片中可视化查看。
+
+## Web端回测结果可视化
+
+- 启动Web服务后，访问 `http://localhost:58181`，可在"回测结果"卡片中查看最近成交、资金曲线和简要统计。
+- 支持与实盘/模拟盘参数对比，便于策略调优。
+
+## 插件式回测架构说明
+
+- 所有交易所交互均通过 `IExchangeClient` 接口协议，主流程可无缝切换实盘、模拟盘、回测等多种实现。
+- MockExchangeClient、SimulateExchangeClient分别支持历史回测和实时模拟盘，便于策略开发、测试和复盘。
+- 未来可扩展多币种、多策略、多账户等高级功能。
+
+## 单元测试
+
+- 推荐使用pytest运行单元测试，覆盖MockExchangeClient、SimulateExchangeClient等关键模块：
+
+```bash
+pytest tests/test_exchange_clients.py
+```
+
 ## 运行
 
 在激活虚拟环境的项目根目录下运行主程序：
@@ -108,3 +162,31 @@ Web 界面可以让你查看当前状态、账户余额、持仓、挂单、历�
 ## 贡献
 
 欢迎提交 Pull Requests 或 Issues 来改进项目。
+
+## 历史K线数据拉取
+
+项目已集成自动化K线数据拉取脚本，便于回测数据准备：
+
+- 脚本位置：`scripts/fetch_kline.py`
+- 功能：自动拉取币安任意币对、任意K线周期的历史数据，输出为MockExchangeClient兼容的JSON格式。
+
+### 使用方法
+
+```bash
+# 拉取BNB/USDT 1小时K线，2021年全年，保存为bnbusdt_1h.json
+python scripts/fetch_kline.py --symbol BNB/USDT --timeframe 1h --since 2021-01-01T00:00:00Z --end 2022-01-01T00:00:00Z --output bnbusdt_1h.json
+
+# 拉取BTC/USDT 4小时K线，近半年
+python scripts/fetch_kline.py --symbol BTC/USDT --timeframe 4h --since 2023-01-01T00:00:00Z --output btcusdt_4h.json
+```
+
+- 参数说明：
+  - `--symbol` 币对（如BNB/USDT、BTC/USDT）
+  - `--timeframe` K线周期（如1h、4h、1d）
+  - `--since` 起始时间（UTC，格式如2021-01-01T00:00:00Z）
+  - `--end` 结束时间（UTC，格式如2022-01-01T00:00:00Z）
+  - `--output` 输出文件名（如bnbusdt_1h.json）
+
+- 输出格式：JSON数组，每行为 `[timestamp, open, high, low, close]`，可直接用于MockExchangeClient回测。
+
+- 支持自动分页拉取，进度实时显示，异常自动重试。

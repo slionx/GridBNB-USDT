@@ -578,3 +578,926 @@ BNB: 0.4493
 2025-04-09 23:21:24 [GridTrader] INFO: 买入信号检查结果: 不满足条件
 2025-04-09 23:21:33 [ExchangeClient] INFO: 交易所连接已安全关闭
 2025-04-09 23:21:33 [root] INFO: 交易所连接已关闭
+2025-04-21 17:50:46 [root] INFO: ==================================================
+2025-04-21 17:50:46 [root] INFO: 网格交易系统启动
+2025-04-21 17:50:46 [root] INFO: ==================================================
+2025-04-21 17:50:46 [PositionControllerS1] INFO: S1 Position Controller initialized. Lookback=52 days, Sell Target=50.0%, Buy Target=70.0%.
+2025-04-21 17:50:46 [GridTrader] INFO: 正在加载市场数据...
+2025-04-21 17:50:46 [GridTrader] ERROR: 初始资金检查失败: 'MockExchangeClient' object has no attribute 'fetch_funding_balance'
+2025-04-21 17:50:46 [GridTrader] ERROR: 初始化失败: 'MockExchangeClient' object has no attribute 'exchange'
+2025-04-21 17:50:46 [root] ERROR: 未配置PUSHPLUS_TOKEN，无法发送通知
+2025-04-21 17:50:46 [root] ERROR: 启动失败: 'MockExchangeClient' object has no attribute 'exchange'
+Traceback (most recent call last):
+  File "/Users/slionx/Program/GridBNB-USDT/main.py", line 71, in main
+    await trader.initialize()
+  File "/Users/slionx/Program/GridBNB-USDT/trader.py", line 84, in initialize
+    self.symbol_info = self.exchange.exchange.market(self.config.SYMBOL)
+                       ^^^^^^^^^^^^^^^^^^^^^^
+AttributeError: 'MockExchangeClient' object has no attribute 'exchange'
+
+2025-04-21 17:50:46 [root] ERROR: 未配置PUSHPLUS_TOKEN，无法发送通知
+2025-04-21 17:50:46 [root] INFO: 交易所连接已关闭
+2025-04-21 17:54:26 [root] INFO: ==================================================
+2025-04-21 17:54:26 [root] INFO: 网格交易系统启动
+2025-04-21 17:54:26 [root] INFO: ==================================================
+2025-04-21 17:54:26 [PositionControllerS1] INFO: S1 Position Controller initialized. Lookback=52 days, Sell Target=50.0%, Buy Target=70.0%.
+2025-04-21 17:54:26 [GridTrader] INFO: 正在加载市场数据...
+2025-04-21 17:54:26 [GridTrader] INFO: 总资产: 5000.00 USDT | 现货: 5000.00 USDT (BNB: 0.0000, USDT: 5000.00) | 理财: 0.00 USDT (BNB: 0.0000, USDT: 0.00)
+2025-04-21 17:54:26 [GridTrader] INFO: 发现可划转USDT: 4200.0
+2025-04-21 17:54:26 [GridTrader] ERROR: 申购USDT到理财失败: 'MockExchangeClient' object has no attribute 'transfer_to_savings'
+2025-04-21 17:54:26 [GridTrader] INFO: 从理财赎回BNB: 3.256003256003256
+2025-04-21 17:54:26 [GridTrader] ERROR: 从理财赎回BNB失败: 'MockExchangeClient' object has no attribute 'transfer_to_spot'
+2025-04-21 17:54:26 [GridTrader] INFO: 资金分配完成
+USDT: 5000.00
+BNB: 0.0000
+2025-04-21 17:54:26 [GridTrader] INFO: 使用实时基准价: 245.7
+2025-04-21 17:54:26 [GridTrader] INFO: 初始化完成 | 交易对: BNB/USDT | 基准价: 245.7
+2025-04-21 17:54:26 [root] ERROR: 未配置PUSHPLUS_TOKEN，无法发送通知
+2025-04-21 17:54:26 [GridTrader] INFO: 市场当前价: 245.7000 | 价差: +0.00%
+2025-04-21 17:54:26 [GridTrader] INFO: 正在获取最近10条交易记录...
+2025-04-21 17:54:26 [GridTrader] INFO: 未能获取到最新的交易记录，将使用本地历史。
+2025-04-21 17:54:26 [PositionControllerS1] INFO: S1: Time to update daily high/low levels...
+2025-04-21 17:54:26 [PositionControllerS1] WARNING: S1: Insufficient daily klines received (1), cannot update levels.
+2025-04-21 17:54:26 [AdvancedRiskManager] ERROR: 计算仓位比例失败: 'base'
+2025-04-21 17:54:26 [AdvancedRiskManager] WARNING: 底仓保护触发 | 当前: 0.00%
+2025-04-21 17:54:26 [root] INFO: Web服务已启动:
+2025-04-21 17:54:26 [root] INFO: - 本地访问: http://localhost:58181
+2025-04-21 17:54:26 [root] INFO: - 局域网访问: http://0.0.0.0:58181
+2025-04-21 17:54:31 [PositionControllerS1] INFO: S1: Time to update daily high/low levels...
+2025-04-21 17:54:31 [PositionControllerS1] WARNING: S1: Insufficient daily klines received (1), cannot update levels.
+2025-04-21 17:54:31 [AdvancedRiskManager] ERROR: 计算仓位比例失败: 'base'
+2025-04-21 17:54:31 [AdvancedRiskManager] WARNING: 底仓保护触发 | 当前: 0.00%
+2025-04-21 17:54:36 [PositionControllerS1] INFO: S1: Time to update daily high/low levels...
+2025-04-21 17:54:36 [PositionControllerS1] WARNING: S1: Insufficient daily klines received (1), cannot update levels.
+2025-04-21 17:54:36 [AdvancedRiskManager] ERROR: 计算仓位比例失败: 'base'
+2025-04-21 17:54:36 [AdvancedRiskManager] WARNING: 底仓保护触发 | 当前: 0.00%
+2025-04-21 17:54:41 [PositionControllerS1] INFO: S1: Time to update daily high/low levels...
+2025-04-21 17:54:41 [PositionControllerS1] WARNING: S1: Insufficient daily klines received (1), cannot update levels.
+2025-04-21 17:54:41 [AdvancedRiskManager] ERROR: 计算仓位比例失败: 'base'
+2025-04-21 17:54:41 [AdvancedRiskManager] WARNING: 底仓保护触发 | 当前: 0.00%
+2025-04-21 17:54:46 [PositionControllerS1] INFO: S1: Time to update daily high/low levels...
+2025-04-21 17:54:46 [PositionControllerS1] WARNING: S1: Insufficient daily klines received (1), cannot update levels.
+2025-04-21 17:54:46 [AdvancedRiskManager] ERROR: 计算仓位比例失败: 'base'
+2025-04-21 17:54:46 [AdvancedRiskManager] WARNING: 底仓保护触发 | 当前: 0.00%
+2025-04-21 17:54:51 [PositionControllerS1] INFO: S1: Time to update daily high/low levels...
+2025-04-21 17:54:51 [PositionControllerS1] WARNING: S1: Insufficient daily klines received (1), cannot update levels.
+2025-04-21 17:54:51 [AdvancedRiskManager] ERROR: 计算仓位比例失败: 'base'
+2025-04-21 17:54:51 [AdvancedRiskManager] WARNING: 底仓保护触发 | 当前: 0.00%
+2025-04-21 17:54:56 [PositionControllerS1] INFO: S1: Time to update daily high/low levels...
+2025-04-21 17:54:56 [PositionControllerS1] WARNING: S1: Insufficient daily klines received (1), cannot update levels.
+2025-04-21 17:54:56 [AdvancedRiskManager] ERROR: 计算仓位比例失败: 'base'
+2025-04-21 17:54:56 [AdvancedRiskManager] WARNING: 底仓保护触发 | 当前: 0.00%
+2025-04-21 17:55:01 [PositionControllerS1] INFO: S1: Time to update daily high/low levels...
+2025-04-21 17:55:01 [PositionControllerS1] WARNING: S1: Insufficient daily klines received (1), cannot update levels.
+2025-04-21 17:55:01 [AdvancedRiskManager] ERROR: 计算仓位比例失败: 'base'
+2025-04-21 17:55:01 [AdvancedRiskManager] WARNING: 底仓保护触发 | 当前: 0.00%
+2025-04-21 17:55:06 [PositionControllerS1] INFO: S1: Time to update daily high/low levels...
+2025-04-21 17:55:06 [PositionControllerS1] WARNING: S1: Insufficient daily klines received (1), cannot update levels.
+2025-04-21 17:55:06 [AdvancedRiskManager] ERROR: 计算仓位比例失败: 'base'
+2025-04-21 17:55:06 [AdvancedRiskManager] WARNING: 底仓保护触发 | 当前: 0.00%
+2025-04-21 17:55:11 [PositionControllerS1] INFO: S1: Time to update daily high/low levels...
+2025-04-21 17:55:11 [PositionControllerS1] WARNING: S1: Insufficient daily klines received (1), cannot update levels.
+2025-04-21 17:55:11 [AdvancedRiskManager] ERROR: 计算仓位比例失败: 'base'
+2025-04-21 17:55:11 [AdvancedRiskManager] WARNING: 底仓保护触发 | 当前: 0.00%
+2025-04-21 17:55:16 [PositionControllerS1] INFO: S1: Time to update daily high/low levels...
+2025-04-21 17:55:16 [PositionControllerS1] WARNING: S1: Insufficient daily klines received (1), cannot update levels.
+2025-04-21 17:55:16 [AdvancedRiskManager] ERROR: 计算仓位比例失败: 'base'
+2025-04-21 17:55:16 [AdvancedRiskManager] WARNING: 底仓保护触发 | 当前: 0.00%
+2025-04-21 17:55:21 [root] INFO: 交易所连接已关闭
+2025-04-21 17:59:40 [root] INFO: ==================================================
+2025-04-21 17:59:40 [root] INFO: 网格交易系统启动
+2025-04-21 17:59:40 [root] INFO: ==================================================
+2025-04-21 17:59:40 [PositionControllerS1] INFO: S1 Position Controller initialized. Lookback=52 days, Sell Target=50.0%, Buy Target=70.0%.
+2025-04-21 17:59:40 [GridTrader] INFO: 正在加载市场数据...
+2025-04-21 17:59:40 [GridTrader] INFO: 总资产: 5000.00 USDT | 现货: 5000.00 USDT (BNB: 0.0000, USDT: 5000.00) | 理财: 0.00 USDT (BNB: 0.0000, USDT: 0.00)
+2025-04-21 17:59:40 [GridTrader] INFO: 发现可划转USDT: 4200.0
+2025-04-21 17:59:40 [GridTrader] ERROR: 申购USDT到理财失败: 'MockExchangeClient' object has no attribute 'transfer_to_savings'
+2025-04-21 17:59:40 [GridTrader] INFO: 从理财赎回BNB: 3.256003256003256
+2025-04-21 17:59:40 [GridTrader] ERROR: 从理财赎回BNB失败: 'MockExchangeClient' object has no attribute 'transfer_to_spot'
+2025-04-21 17:59:40 [GridTrader] INFO: 资金分配完成
+USDT: 5000.00
+BNB: 0.0000
+2025-04-21 17:59:40 [GridTrader] INFO: 使用实时基准价: 245.7
+2025-04-21 17:59:40 [GridTrader] INFO: 初始化完成 | 交易对: BNB/USDT | 基准价: 245.7
+2025-04-21 17:59:40 [root] ERROR: 未配置PUSHPLUS_TOKEN，无法发送通知
+2025-04-21 17:59:40 [GridTrader] INFO: 市场当前价: 245.7000 | 价差: +0.00%
+2025-04-21 17:59:40 [GridTrader] INFO: 正在获取最近10条交易记录...
+2025-04-21 17:59:40 [GridTrader] INFO: 未能获取到最新的交易记录，将使用本地历史。
+2025-04-21 17:59:40 [PositionControllerS1] INFO: S1: Time to update daily high/low levels...
+2025-04-21 17:59:40 [PositionControllerS1] INFO: S1 Levels Updated: High=634.5000, Low=508.0000
+2025-04-21 17:59:40 [AdvancedRiskManager] ERROR: 计算仓位比例失败: 'base'
+2025-04-21 17:59:40 [AdvancedRiskManager] WARNING: 底仓保护触发 | 当前: 0.00%
+2025-04-21 17:59:40 [root] INFO: Web服务已启动:
+2025-04-21 17:59:40 [root] INFO: - 本地访问: http://localhost:58181
+2025-04-21 17:59:40 [root] INFO: - 局域网访问: http://0.0.0.0:58181
+2025-04-21 17:59:45 [AdvancedRiskManager] ERROR: 计算仓位比例失败: 'base'
+2025-04-21 17:59:45 [AdvancedRiskManager] WARNING: 底仓保护触发 | 当前: 0.00%
+2025-04-21 17:59:50 [AdvancedRiskManager] ERROR: 计算仓位比例失败: 'base'
+2025-04-21 17:59:50 [AdvancedRiskManager] WARNING: 底仓保护触发 | 当前: 0.00%
+2025-04-21 17:59:55 [AdvancedRiskManager] ERROR: 计算仓位比例失败: 'base'
+2025-04-21 17:59:55 [AdvancedRiskManager] WARNING: 底仓保护触发 | 当前: 0.00%
+2025-04-21 17:59:57 [root] INFO: 交易所连接已关闭
+2025-04-21 18:01:12 [root] INFO: ==================================================
+2025-04-21 18:01:12 [root] INFO: 网格交易系统启动
+2025-04-21 18:01:12 [root] INFO: ==================================================
+2025-04-21 18:01:12 [PositionControllerS1] INFO: S1 Position Controller initialized. Lookback=52 days, Sell Target=50.0%, Buy Target=70.0%.
+2025-04-21 18:01:12 [GridTrader] INFO: 正在加载市场数据...
+2025-04-21 18:01:12 [GridTrader] INFO: 总资产: 5000.00 USDT | 现货: 5000.00 USDT (BNB: 0.0000, USDT: 5000.00) | 理财: 0.00 USDT (BNB: 0.0000, USDT: 0.00)
+2025-04-21 18:01:12 [GridTrader] INFO: 发现可划转USDT: 4200.0
+2025-04-21 18:01:12 [GridTrader] ERROR: 申购USDT到理财失败: 'MockExchangeClient' object has no attribute 'transfer_to_savings'
+2025-04-21 18:01:12 [GridTrader] INFO: 从理财赎回BNB: 3.256003256003256
+2025-04-21 18:01:12 [GridTrader] ERROR: 从理财赎回BNB失败: 'MockExchangeClient' object has no attribute 'transfer_to_spot'
+2025-04-21 18:01:12 [GridTrader] INFO: 资金分配完成
+USDT: 5000.00
+BNB: 0.0000
+2025-04-21 18:01:12 [GridTrader] INFO: 使用实时基准价: 245.7
+2025-04-21 18:01:12 [GridTrader] INFO: 初始化完成 | 交易对: BNB/USDT | 基准价: 245.7
+2025-04-21 18:01:12 [root] ERROR: 未配置PUSHPLUS_TOKEN，无法发送通知
+2025-04-21 18:01:12 [GridTrader] INFO: 市场当前价: 245.7000 | 价差: +0.00%
+2025-04-21 18:01:12 [GridTrader] INFO: 正在获取最近10条交易记录...
+2025-04-21 18:01:12 [GridTrader] INFO: 未能获取到最新的交易记录，将使用本地历史。
+2025-04-21 18:01:12 [PositionControllerS1] INFO: S1: Time to update daily high/low levels...
+2025-04-21 18:01:12 [PositionControllerS1] INFO: S1 Levels Updated: High=634.5000, Low=508.0000
+2025-04-21 18:01:12 [AdvancedRiskManager] ERROR: 计算仓位比例失败: 'base'
+2025-04-21 18:01:12 [AdvancedRiskManager] WARNING: 底仓保护触发 | 当前: 0.00%
+2025-04-21 18:01:12 [root] INFO: Web服务已启动:
+2025-04-21 18:01:12 [root] INFO: - 本地访问: http://localhost:58181
+2025-04-21 18:01:12 [root] INFO: - 局域网访问: http://0.0.0.0:58181
+2025-04-21 18:01:17 [AdvancedRiskManager] ERROR: 计算仓位比例失败: 'base'
+2025-04-21 18:01:17 [AdvancedRiskManager] WARNING: 底仓保护触发 | 当前: 0.00%
+2025-04-21 18:01:22 [AdvancedRiskManager] ERROR: 计算仓位比例失败: 'base'
+2025-04-21 18:01:22 [AdvancedRiskManager] WARNING: 底仓保护触发 | 当前: 0.00%
+2025-04-21 18:01:24 [root] INFO: 交易所连接已关闭
+2025-04-21 18:02:43 [root] INFO: ==================================================
+2025-04-21 18:02:43 [root] INFO: 网格交易系统启动
+2025-04-21 18:02:43 [root] INFO: ==================================================
+2025-04-21 18:02:43 [PositionControllerS1] INFO: S1 Position Controller initialized. Lookback=52 days, Sell Target=50.0%, Buy Target=70.0%.
+2025-04-21 18:02:43 [GridTrader] INFO: 正在加载市场数据...
+2025-04-21 18:02:43 [GridTrader] INFO: 总资产: 5000.00 USDT | 现货: 5000.00 USDT (BNB: 0.0000, USDT: 5000.00) | 理财: 0.00 USDT (BNB: 0.0000, USDT: 0.00)
+2025-04-21 18:02:43 [GridTrader] INFO: 发现可划转USDT: 4200.0
+2025-04-21 18:02:43 [GridTrader] ERROR: 申购USDT到理财失败: 'MockExchangeClient' object has no attribute 'transfer_to_savings'
+2025-04-21 18:02:43 [GridTrader] INFO: 从理财赎回BNB: 3.256003256003256
+2025-04-21 18:02:43 [GridTrader] ERROR: 从理财赎回BNB失败: 'MockExchangeClient' object has no attribute 'transfer_to_spot'
+2025-04-21 18:02:43 [GridTrader] INFO: 资金分配完成
+USDT: 5000.00
+BNB: 0.0000
+2025-04-21 18:02:43 [GridTrader] INFO: 使用实时基准价: 245.7
+2025-04-21 18:02:43 [GridTrader] INFO: 初始化完成 | 交易对: BNB/USDT | 基准价: 245.7
+2025-04-21 18:02:43 [root] ERROR: 未配置PUSHPLUS_TOKEN，无法发送通知
+2025-04-21 18:02:43 [GridTrader] INFO: 市场当前价: 245.7000 | 价差: +0.00%
+2025-04-21 18:02:43 [GridTrader] INFO: 正在获取最近10条交易记录...
+2025-04-21 18:02:43 [GridTrader] INFO: 未能获取到最新的交易记录，将使用本地历史。
+2025-04-21 18:02:43 [PositionControllerS1] INFO: S1: Time to update daily high/low levels...
+2025-04-21 18:02:43 [PositionControllerS1] INFO: S1 Levels Updated: High=634.5000, Low=508.0000
+2025-04-21 18:02:43 [AdvancedRiskManager] ERROR: 计算仓位比例失败: 'base'
+2025-04-21 18:02:43 [AdvancedRiskManager] WARNING: 底仓保护触发 | 当前: 0.00%
+2025-04-21 18:02:43 [root] INFO: Web服务已启动:
+2025-04-21 18:02:43 [root] INFO: - 本地访问: http://localhost:58181
+2025-04-21 18:02:43 [root] INFO: - 局域网访问: http://0.0.0.0:58181
+2025-04-21 18:02:44 [root] INFO: 交易所连接已关闭
+2025-04-21 18:02:47 [root] INFO: ==================================================
+2025-04-21 18:02:47 [root] INFO: 网格交易系统启动
+2025-04-21 18:02:47 [root] INFO: ==================================================
+2025-04-21 18:02:47 [PositionControllerS1] INFO: S1 Position Controller initialized. Lookback=52 days, Sell Target=50.0%, Buy Target=70.0%.
+2025-04-21 18:02:47 [GridTrader] INFO: 正在加载市场数据...
+2025-04-21 18:02:47 [GridTrader] INFO: 总资产: 6228.50 USDT | 现货: 6228.50 USDT (BNB: 5.0000, USDT: 5000.00) | 理财: 0.00 USDT (BNB: 0.0000, USDT: 0.00)
+2025-04-21 18:02:47 [GridTrader] INFO: 发现可划转USDT: 4003.44
+2025-04-21 18:02:47 [GridTrader] ERROR: 申购USDT到理财失败: 'MockExchangeClient' object has no attribute 'transfer_to_savings'
+2025-04-21 18:02:47 [GridTrader] INFO: 发现可划转BNB: 0.9439967439967436
+2025-04-21 18:02:47 [GridTrader] ERROR: 申购BNB到理财失败: 'MockExchangeClient' object has no attribute 'transfer_to_savings'
+2025-04-21 18:02:47 [GridTrader] INFO: 资金分配完成
+USDT: 5000.00
+BNB: 5.0000
+2025-04-21 18:02:47 [GridTrader] INFO: 使用实时基准价: 245.7
+2025-04-21 18:02:47 [GridTrader] INFO: 初始化完成 | 交易对: BNB/USDT | 基准价: 245.7
+2025-04-21 18:02:47 [root] ERROR: 未配置PUSHPLUS_TOKEN，无法发送通知
+2025-04-21 18:02:47 [GridTrader] INFO: 市场当前价: 245.7000 | 价差: +0.00%
+2025-04-21 18:02:47 [GridTrader] INFO: 正在获取最近10条交易记录...
+2025-04-21 18:02:47 [GridTrader] INFO: 未能获取到最新的交易记录，将使用本地历史。
+2025-04-21 18:02:47 [PositionControllerS1] INFO: S1: Time to update daily high/low levels...
+2025-04-21 18:02:47 [PositionControllerS1] INFO: S1 Levels Updated: High=634.5000, Low=508.0000
+2025-04-21 18:02:47 [AdvancedRiskManager] ERROR: 计算仓位比例失败: 'base'
+2025-04-21 18:02:47 [AdvancedRiskManager] WARNING: 底仓保护触发 | 当前: 0.00%
+2025-04-21 18:02:47 [root] INFO: Web服务已启动:
+2025-04-21 18:02:47 [root] INFO: - 本地访问: http://localhost:58181
+2025-04-21 18:02:47 [root] INFO: - 局域网访问: http://0.0.0.0:58181
+2025-04-21 18:02:52 [AdvancedRiskManager] ERROR: 计算仓位比例失败: 'base'
+2025-04-21 18:02:52 [AdvancedRiskManager] WARNING: 底仓保护触发 | 当前: 0.00%
+2025-04-21 18:02:57 [AdvancedRiskManager] ERROR: 计算仓位比例失败: 'base'
+2025-04-21 18:02:57 [AdvancedRiskManager] WARNING: 底仓保护触发 | 当前: 0.00%
+2025-04-21 18:03:02 [AdvancedRiskManager] ERROR: 计算仓位比例失败: 'base'
+2025-04-21 18:03:02 [AdvancedRiskManager] WARNING: 底仓保护触发 | 当前: 0.00%
+2025-04-21 18:03:05 [root] INFO: 交易所连接已关闭
+2025-04-21 18:04:57 [root] INFO: ==================================================
+2025-04-21 18:04:57 [root] INFO: 网格交易系统启动
+2025-04-21 18:04:57 [root] INFO: ==================================================
+2025-04-21 18:04:57 [PositionControllerS1] INFO: S1 Position Controller initialized. Lookback=52 days, Sell Target=50.0%, Buy Target=70.0%.
+2025-04-21 18:04:57 [GridTrader] INFO: 正在加载市场数据...
+2025-04-21 18:04:57 [GridTrader] INFO: 总资产: 6228.50 USDT | 现货: 6228.50 USDT (BNB: 5.0000, USDT: 5000.00) | 理财: 0.00 USDT (BNB: 0.0000, USDT: 0.00)
+2025-04-21 18:04:57 [GridTrader] INFO: 发现可划转USDT: 4003.44
+2025-04-21 18:04:57 [GridTrader] ERROR: 申购USDT到理财失败: 'MockExchangeClient' object has no attribute 'transfer_to_savings'
+2025-04-21 18:04:57 [GridTrader] INFO: 发现可划转BNB: 0.9439967439967436
+2025-04-21 18:04:57 [GridTrader] ERROR: 申购BNB到理财失败: 'MockExchangeClient' object has no attribute 'transfer_to_savings'
+2025-04-21 18:04:57 [GridTrader] INFO: 资金分配完成
+USDT: 5000.00
+BNB: 5.0000
+2025-04-21 18:04:57 [GridTrader] INFO: 使用实时基准价: 245.7
+2025-04-21 18:04:57 [GridTrader] INFO: 初始化完成 | 交易对: BNB/USDT | 基准价: 245.7
+2025-04-21 18:04:57 [root] ERROR: 未配置PUSHPLUS_TOKEN，无法发送通知
+2025-04-21 18:04:57 [GridTrader] INFO: 市场当前价: 245.7000 | 价差: +0.00%
+2025-04-21 18:04:57 [GridTrader] INFO: 正在获取最近10条交易记录...
+2025-04-21 18:04:57 [GridTrader] INFO: 未能获取到最新的交易记录，将使用本地历史。
+2025-04-21 18:04:57 [PositionControllerS1] INFO: S1: Time to update daily high/low levels...
+2025-04-21 18:04:57 [PositionControllerS1] INFO: S1 Levels Updated: High=634.5000, Low=508.0000
+2025-04-21 18:04:57 [AdvancedRiskManager] ERROR: 计算仓位比例失败: 'base'
+2025-04-21 18:04:57 [AdvancedRiskManager] WARNING: 底仓保护触发 | 当前: 0.00%
+2025-04-21 18:04:57 [root] INFO: Web服务已启动:
+2025-04-21 18:04:57 [root] INFO: - 本地访问: http://localhost:58181
+2025-04-21 18:04:57 [root] INFO: - 局域网访问: http://0.0.0.0:58181
+2025-04-21 18:05:02 [AdvancedRiskManager] ERROR: 计算仓位比例失败: 'base'
+2025-04-21 18:05:02 [AdvancedRiskManager] WARNING: 底仓保护触发 | 当前: 0.00%
+2025-04-21 18:05:07 [AdvancedRiskManager] ERROR: 计算仓位比例失败: 'base'
+2025-04-21 18:05:07 [AdvancedRiskManager] WARNING: 底仓保护触发 | 当前: 0.00%
+2025-04-21 18:05:12 [AdvancedRiskManager] ERROR: 计算仓位比例失败: 'base'
+2025-04-21 18:05:12 [AdvancedRiskManager] WARNING: 底仓保护触发 | 当前: 0.00%
+2025-04-21 18:05:14 [root] INFO: 交易所连接已关闭
+2025-04-21 18:07:30 [root] INFO: ==================================================
+2025-04-21 18:07:30 [root] INFO: 网格交易系统启动
+2025-04-21 18:07:30 [root] INFO: ==================================================
+2025-04-21 18:07:30 [PositionControllerS1] INFO: S1 Position Controller initialized. Lookback=52 days, Sell Target=50.0%, Buy Target=70.0%.
+2025-04-21 18:07:30 [GridTrader] INFO: 正在加载市场数据...
+2025-04-21 18:07:30 [GridTrader] INFO: 总资产: 6228.50 USDT | 现货: 6228.50 USDT (BNB: 5.0000, USDT: 5000.00) | 理财: 0.00 USDT (BNB: 0.0000, USDT: 0.00)
+2025-04-21 18:07:30 [GridTrader] INFO: 发现可划转USDT: 4003.44
+2025-04-21 18:07:30 [GridTrader] ERROR: 申购USDT到理财失败: 'MockExchangeClient' object has no attribute 'transfer_to_savings'
+2025-04-21 18:07:30 [GridTrader] INFO: 发现可划转BNB: 0.9439967439967436
+2025-04-21 18:07:30 [GridTrader] ERROR: 申购BNB到理财失败: 'MockExchangeClient' object has no attribute 'transfer_to_savings'
+2025-04-21 18:07:30 [GridTrader] INFO: 资金分配完成
+USDT: 5000.00
+BNB: 5.0000
+2025-04-21 18:07:30 [GridTrader] INFO: 使用实时基准价: 245.7
+2025-04-21 18:07:30 [GridTrader] INFO: 初始化完成 | 交易对: BNB/USDT | 基准价: 245.7
+2025-04-21 18:07:30 [root] ERROR: 未配置PUSHPLUS_TOKEN，无法发送通知
+2025-04-21 18:07:30 [GridTrader] INFO: 市场当前价: 245.7000 | 价差: +0.00%
+2025-04-21 18:07:30 [GridTrader] INFO: 正在获取最近10条交易记录...
+2025-04-21 18:07:30 [GridTrader] INFO: 未能获取到最新的交易记录，将使用本地历史。
+2025-04-21 18:07:30 [PositionControllerS1] INFO: S1: Time to update daily high/low levels...
+2025-04-21 18:07:30 [PositionControllerS1] INFO: S1 Levels Updated: High=634.5000, Low=508.0000
+2025-04-21 18:07:30 [AdvancedRiskManager] ERROR: 计算仓位比例失败: 'base'
+[DEBUG] balance: N/A
+Traceback:
+Traceback (most recent call last):
+  File "/Users/slionx/Program/GridBNB-USDT/risk_manager.py", line 56, in _get_position_ratio
+    position_value = await self._get_position_value()
+                     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/slionx/Program/GridBNB-USDT/risk_manager.py", line 47, in _get_position_value
+    float(balance.get('total', {}).get(self.trader.symbol_info['base'], 0)) +
+                                       ~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^
+KeyError: 'base'
+
+2025-04-21 18:07:30 [AdvancedRiskManager] WARNING: 底仓保护触发 | 当前: 0.00%
+2025-04-21 18:07:30 [root] INFO: Web服务已启动:
+2025-04-21 18:07:30 [root] INFO: - 本地访问: http://localhost:58181
+2025-04-21 18:07:30 [root] INFO: - 局域网访问: http://0.0.0.0:58181
+2025-04-21 18:07:35 [AdvancedRiskManager] ERROR: 计算仓位比例失败: 'base'
+[DEBUG] balance: N/A
+Traceback:
+Traceback (most recent call last):
+  File "/Users/slionx/Program/GridBNB-USDT/risk_manager.py", line 56, in _get_position_ratio
+    position_value = await self._get_position_value()
+                     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/slionx/Program/GridBNB-USDT/risk_manager.py", line 47, in _get_position_value
+    float(balance.get('total', {}).get(self.trader.symbol_info['base'], 0)) +
+                                       ~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^
+KeyError: 'base'
+
+2025-04-21 18:07:35 [AdvancedRiskManager] WARNING: 底仓保护触发 | 当前: 0.00%
+2025-04-21 18:07:37 [root] INFO: 交易所连接已关闭
+2025-04-21 18:07:57 [root] INFO: ==================================================
+2025-04-21 18:07:57 [root] INFO: 网格交易系统启动
+2025-04-21 18:07:57 [root] INFO: ==================================================
+2025-04-21 18:07:57 [PositionControllerS1] INFO: S1 Position Controller initialized. Lookback=52 days, Sell Target=50.0%, Buy Target=70.0%.
+2025-04-21 18:07:57 [GridTrader] INFO: 正在加载市场数据...
+2025-04-21 18:07:57 [GridTrader] INFO: 总资产: 6228.50 USDT | 现货: 6228.50 USDT (BNB: 5.0000, USDT: 5000.00) | 理财: 0.00 USDT (BNB: 0.0000, USDT: 0.00)
+2025-04-21 18:07:57 [GridTrader] INFO: 发现可划转USDT: 4003.44
+2025-04-21 18:07:57 [GridTrader] ERROR: 申购USDT到理财失败: 'MockExchangeClient' object has no attribute 'transfer_to_savings'
+2025-04-21 18:07:57 [GridTrader] INFO: 发现可划转BNB: 0.9439967439967436
+2025-04-21 18:07:57 [GridTrader] ERROR: 申购BNB到理财失败: 'MockExchangeClient' object has no attribute 'transfer_to_savings'
+2025-04-21 18:07:57 [GridTrader] INFO: 资金分配完成
+USDT: 5000.00
+BNB: 5.0000
+2025-04-21 18:07:57 [GridTrader] INFO: 使用实时基准价: 245.7
+2025-04-21 18:07:57 [GridTrader] INFO: 初始化完成 | 交易对: BNB/USDT | 基准价: 245.7
+2025-04-21 18:07:57 [root] ERROR: 未配置PUSHPLUS_TOKEN，无法发送通知
+2025-04-21 18:07:57 [GridTrader] INFO: 市场当前价: 245.7000 | 价差: +0.00%
+2025-04-21 18:07:57 [GridTrader] INFO: 正在获取最近10条交易记录...
+2025-04-21 18:07:57 [GridTrader] INFO: 未能获取到最新的交易记录，将使用本地历史。
+2025-04-21 18:07:57 [PositionControllerS1] INFO: S1: Time to update daily high/low levels...
+2025-04-21 18:07:57 [PositionControllerS1] INFO: S1 Levels Updated: High=634.5000, Low=508.0000
+2025-04-21 18:07:57 [AdvancedRiskManager] ERROR: 计算仓位比例失败: 'base'
+[DEBUG] balance: N/A
+Traceback:
+Traceback (most recent call last):
+  File "/Users/slionx/Program/GridBNB-USDT/risk_manager.py", line 56, in _get_position_ratio
+    position_value = await self._get_position_value()
+                     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/slionx/Program/GridBNB-USDT/risk_manager.py", line 47, in _get_position_value
+    float(balance.get('total', {}).get(self.trader.symbol_info['base'], 0)) +
+                                       ~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^
+KeyError: 'base'
+
+2025-04-21 18:07:57 [AdvancedRiskManager] WARNING: 底仓保护触发 | 当前: 0.00%
+2025-04-21 18:07:57 [root] INFO: Web服务已启动:
+2025-04-21 18:07:57 [root] INFO: - 本地访问: http://localhost:58181
+2025-04-21 18:07:57 [root] INFO: - 局域网访问: http://0.0.0.0:58181
+2025-04-21 18:08:01 [root] INFO: 交易所连接已关闭
+2025-04-21 18:09:25 [root] INFO: ==================================================
+2025-04-21 18:09:25 [root] INFO: 网格交易系统启动
+2025-04-21 18:09:25 [root] INFO: ==================================================
+2025-04-21 18:09:25 [PositionControllerS1] INFO: S1 Position Controller initialized. Lookback=52 days, Sell Target=50.0%, Buy Target=70.0%.
+2025-04-21 18:09:25 [GridTrader] INFO: 正在加载市场数据...
+2025-04-21 18:09:25 [GridTrader] INFO: 总资产: 6228.50 USDT | 现货: 6228.50 USDT (BNB: 5.0000, USDT: 5000.00) | 理财: 0.00 USDT (BNB: 0.0000, USDT: 0.00)
+2025-04-21 18:09:25 [GridTrader] INFO: 发现可划转USDT: 4003.44
+2025-04-21 18:09:25 [GridTrader] ERROR: 申购USDT到理财失败: 'MockExchangeClient' object has no attribute 'transfer_to_savings'
+2025-04-21 18:09:25 [GridTrader] INFO: 发现可划转BNB: 0.9439967439967436
+2025-04-21 18:09:25 [GridTrader] ERROR: 申购BNB到理财失败: 'MockExchangeClient' object has no attribute 'transfer_to_savings'
+2025-04-21 18:09:25 [GridTrader] INFO: 资金分配完成
+USDT: 5000.00
+BNB: 5.0000
+2025-04-21 18:09:25 [GridTrader] INFO: 使用实时基准价: 245.7
+2025-04-21 18:09:25 [GridTrader] INFO: 初始化完成 | 交易对: BNB/USDT | 基准价: 245.7
+2025-04-21 18:09:25 [root] ERROR: 未配置PUSHPLUS_TOKEN，无法发送通知
+2025-04-21 18:09:25 [GridTrader] INFO: 市场当前价: 245.7000 | 价差: +0.00%
+2025-04-21 18:09:25 [GridTrader] INFO: 正在获取最近10条交易记录...
+2025-04-21 18:09:25 [GridTrader] INFO: 未能获取到最新的交易记录，将使用本地历史。
+2025-04-21 18:09:25 [PositionControllerS1] INFO: S1: Time to update daily high/low levels...
+2025-04-21 18:09:25 [PositionControllerS1] INFO: S1 Levels Updated: High=634.5000, Low=508.0000
+2025-04-21 18:09:25 [PositionControllerS1] INFO: S1: Low level breached. Need to BUY 12.74501425 BNB to reach 70% target.
+2025-04-21 18:09:25 [PositionControllerS1] INFO: S1: Condition met for BUY adjustment.
+2025-04-21 18:09:25 [PositionControllerS1] INFO: S1: Placing BUY order for 12.74500000 BNB at market price (approx 245.7)...
+2025-04-21 18:09:25 [PositionControllerS1] ERROR: S1: Failed to execute adjustment order (BUY 12.74501425): 'MockExchangeClient' object has no attribute 'create_market_order'
+Traceback (most recent call last):
+  File "/Users/slionx/Program/GridBNB-USDT/position_controller_s1.py", line 160, in _execute_s1_adjustment
+    order = await self.trader.exchange.create_market_order(
+                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AttributeError: 'MockExchangeClient' object has no attribute 'create_market_order'
+2025-04-21 18:09:25 [root] INFO: Web服务已启动:
+2025-04-21 18:09:25 [root] INFO: - 本地访问: http://localhost:58181
+2025-04-21 18:09:25 [root] INFO: - 局域网访问: http://0.0.0.0:58181
+2025-04-21 18:09:28 [root] INFO: 交易所连接已关闭
+2025-04-21 18:10:55 [root] INFO: ==================================================
+2025-04-21 18:10:55 [root] INFO: 网格交易系统启动
+2025-04-21 18:10:55 [root] INFO: ==================================================
+2025-04-21 18:10:55 [PositionControllerS1] INFO: S1 Position Controller initialized. Lookback=52 days, Sell Target=50.0%, Buy Target=70.0%.
+2025-04-21 18:10:55 [GridTrader] INFO: 正在加载市场数据...
+2025-04-21 18:10:55 [GridTrader] INFO: 总资产: 6228.50 USDT | 现货: 6228.50 USDT (BNB: 5.0000, USDT: 5000.00) | 理财: 0.00 USDT (BNB: 0.0000, USDT: 0.00)
+2025-04-21 18:10:55 [GridTrader] INFO: 发现可划转USDT: 4003.44
+2025-04-21 18:10:55 [GridTrader] ERROR: 申购USDT到理财失败: 'MockExchangeClient' object has no attribute 'transfer_to_savings'
+2025-04-21 18:10:55 [GridTrader] INFO: 发现可划转BNB: 0.9439967439967436
+2025-04-21 18:10:55 [GridTrader] ERROR: 申购BNB到理财失败: 'MockExchangeClient' object has no attribute 'transfer_to_savings'
+2025-04-21 18:10:55 [GridTrader] INFO: 资金分配完成
+USDT: 5000.00
+BNB: 5.0000
+2025-04-21 18:10:55 [GridTrader] INFO: 使用实时基准价: 245.7
+2025-04-21 18:10:55 [GridTrader] INFO: 初始化完成 | 交易对: BNB/USDT | 基准价: 245.7
+2025-04-21 18:10:55 [root] ERROR: 未配置PUSHPLUS_TOKEN，无法发送通知
+2025-04-21 18:10:55 [GridTrader] INFO: 市场当前价: 245.7000 | 价差: +0.00%
+2025-04-21 18:10:55 [GridTrader] INFO: 正在获取最近10条交易记录...
+2025-04-21 18:10:55 [GridTrader] INFO: 未能获取到最新的交易记录，将使用本地历史。
+2025-04-21 18:10:55 [PositionControllerS1] INFO: S1: Time to update daily high/low levels...
+2025-04-21 18:10:55 [PositionControllerS1] INFO: S1 Levels Updated: High=634.5000, Low=508.0000
+2025-04-21 18:10:55 [PositionControllerS1] INFO: S1: Low level breached. Need to BUY 12.74501425 BNB to reach 70% target.
+2025-04-21 18:10:55 [PositionControllerS1] INFO: S1: Condition met for BUY adjustment.
+2025-04-21 18:10:55 [PositionControllerS1] INFO: S1: Placing BUY order for 12.74500000 BNB at market price (approx 245.7)...
+2025-04-21 18:10:55 [PositionControllerS1] ERROR: S1: Failed to execute adjustment order (BUY 12.74501425): 'MockExchangeClient' object has no attribute 'create_market_order'
+Traceback (most recent call last):
+  File "/Users/slionx/Program/GridBNB-USDT/position_controller_s1.py", line 160, in _execute_s1_adjustment
+    order = await self.trader.exchange.create_market_order(
+                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AttributeError: 'MockExchangeClient' object has no attribute 'create_market_order'
+2025-04-21 18:10:55 [root] INFO: Web服务已启动:
+2025-04-21 18:10:55 [root] INFO: - 本地访问: http://localhost:58181
+2025-04-21 18:10:55 [root] INFO: - 局域网访问: http://0.0.0.0:58181
+2025-04-21 18:11:00 [PositionControllerS1] INFO: S1: Low level breached. Need to BUY 12.74501425 BNB to reach 70% target.
+2025-04-21 18:11:00 [PositionControllerS1] INFO: S1: Condition met for BUY adjustment.
+2025-04-21 18:11:00 [PositionControllerS1] INFO: S1: Placing BUY order for 12.74500000 BNB at market price (approx 245.7)...
+2025-04-21 18:11:00 [PositionControllerS1] ERROR: S1: Failed to execute adjustment order (BUY 12.74501425): 'MockExchangeClient' object has no attribute 'create_market_order'
+Traceback (most recent call last):
+  File "/Users/slionx/Program/GridBNB-USDT/position_controller_s1.py", line 160, in _execute_s1_adjustment
+    order = await self.trader.exchange.create_market_order(
+                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AttributeError: 'MockExchangeClient' object has no attribute 'create_market_order'
+2025-04-21 18:11:05 [PositionControllerS1] INFO: S1: Low level breached. Need to BUY 12.74501425 BNB to reach 70% target.
+2025-04-21 18:11:05 [PositionControllerS1] INFO: S1: Condition met for BUY adjustment.
+2025-04-21 18:11:05 [PositionControllerS1] INFO: S1: Placing BUY order for 12.74500000 BNB at market price (approx 245.7)...
+2025-04-21 18:11:05 [PositionControllerS1] ERROR: S1: Failed to execute adjustment order (BUY 12.74501425): 'MockExchangeClient' object has no attribute 'create_market_order'
+Traceback (most recent call last):
+  File "/Users/slionx/Program/GridBNB-USDT/position_controller_s1.py", line 160, in _execute_s1_adjustment
+    order = await self.trader.exchange.create_market_order(
+                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AttributeError: 'MockExchangeClient' object has no attribute 'create_market_order'
+2025-04-21 18:11:10 [PositionControllerS1] INFO: S1: Low level breached. Need to BUY 12.74501425 BNB to reach 70% target.
+2025-04-21 18:11:10 [PositionControllerS1] INFO: S1: Condition met for BUY adjustment.
+2025-04-21 18:11:10 [PositionControllerS1] INFO: S1: Placing BUY order for 12.74500000 BNB at market price (approx 245.7)...
+2025-04-21 18:11:10 [PositionControllerS1] ERROR: S1: Failed to execute adjustment order (BUY 12.74501425): 'MockExchangeClient' object has no attribute 'create_market_order'
+Traceback (most recent call last):
+  File "/Users/slionx/Program/GridBNB-USDT/position_controller_s1.py", line 160, in _execute_s1_adjustment
+    order = await self.trader.exchange.create_market_order(
+                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AttributeError: 'MockExchangeClient' object has no attribute 'create_market_order'
+2025-04-21 18:11:15 [PositionControllerS1] INFO: S1: Low level breached. Need to BUY 12.74501425 BNB to reach 70% target.
+2025-04-21 18:11:15 [PositionControllerS1] INFO: S1: Condition met for BUY adjustment.
+2025-04-21 18:11:15 [PositionControllerS1] INFO: S1: Placing BUY order for 12.74500000 BNB at market price (approx 245.7)...
+2025-04-21 18:11:15 [PositionControllerS1] ERROR: S1: Failed to execute adjustment order (BUY 12.74501425): 'MockExchangeClient' object has no attribute 'create_market_order'
+Traceback (most recent call last):
+  File "/Users/slionx/Program/GridBNB-USDT/position_controller_s1.py", line 160, in _execute_s1_adjustment
+    order = await self.trader.exchange.create_market_order(
+                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AttributeError: 'MockExchangeClient' object has no attribute 'create_market_order'
+2025-04-21 18:11:20 [PositionControllerS1] INFO: S1: Low level breached. Need to BUY 12.74501425 BNB to reach 70% target.
+2025-04-21 18:11:20 [PositionControllerS1] INFO: S1: Condition met for BUY adjustment.
+2025-04-21 18:11:20 [PositionControllerS1] INFO: S1: Placing BUY order for 12.74500000 BNB at market price (approx 245.7)...
+2025-04-21 18:11:20 [PositionControllerS1] ERROR: S1: Failed to execute adjustment order (BUY 12.74501425): 'MockExchangeClient' object has no attribute 'create_market_order'
+Traceback (most recent call last):
+  File "/Users/slionx/Program/GridBNB-USDT/position_controller_s1.py", line 160, in _execute_s1_adjustment
+    order = await self.trader.exchange.create_market_order(
+                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AttributeError: 'MockExchangeClient' object has no attribute 'create_market_order'
+2025-04-21 18:11:25 [PositionControllerS1] INFO: S1: Low level breached. Need to BUY 12.74501425 BNB to reach 70% target.
+2025-04-21 18:11:25 [PositionControllerS1] INFO: S1: Condition met for BUY adjustment.
+2025-04-21 18:11:25 [PositionControllerS1] INFO: S1: Placing BUY order for 12.74500000 BNB at market price (approx 245.7)...
+2025-04-21 18:11:25 [PositionControllerS1] ERROR: S1: Failed to execute adjustment order (BUY 12.74501425): 'MockExchangeClient' object has no attribute 'create_market_order'
+Traceback (most recent call last):
+  File "/Users/slionx/Program/GridBNB-USDT/position_controller_s1.py", line 160, in _execute_s1_adjustment
+    order = await self.trader.exchange.create_market_order(
+                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AttributeError: 'MockExchangeClient' object has no attribute 'create_market_order'
+2025-04-21 18:11:30 [PositionControllerS1] INFO: S1: Low level breached. Need to BUY 12.74501425 BNB to reach 70% target.
+2025-04-21 18:11:30 [PositionControllerS1] INFO: S1: Condition met for BUY adjustment.
+2025-04-21 18:11:30 [PositionControllerS1] INFO: S1: Placing BUY order for 12.74500000 BNB at market price (approx 245.7)...
+2025-04-21 18:11:30 [PositionControllerS1] ERROR: S1: Failed to execute adjustment order (BUY 12.74501425): 'MockExchangeClient' object has no attribute 'create_market_order'
+Traceback (most recent call last):
+  File "/Users/slionx/Program/GridBNB-USDT/position_controller_s1.py", line 160, in _execute_s1_adjustment
+    order = await self.trader.exchange.create_market_order(
+                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AttributeError: 'MockExchangeClient' object has no attribute 'create_market_order'
+2025-04-21 18:11:35 [PositionControllerS1] INFO: S1: Low level breached. Need to BUY 12.74501425 BNB to reach 70% target.
+2025-04-21 18:11:35 [PositionControllerS1] INFO: S1: Condition met for BUY adjustment.
+2025-04-21 18:11:35 [PositionControllerS1] INFO: S1: Placing BUY order for 12.74500000 BNB at market price (approx 245.7)...
+2025-04-21 18:11:35 [PositionControllerS1] ERROR: S1: Failed to execute adjustment order (BUY 12.74501425): 'MockExchangeClient' object has no attribute 'create_market_order'
+Traceback (most recent call last):
+  File "/Users/slionx/Program/GridBNB-USDT/position_controller_s1.py", line 160, in _execute_s1_adjustment
+    order = await self.trader.exchange.create_market_order(
+                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AttributeError: 'MockExchangeClient' object has no attribute 'create_market_order'
+2025-04-21 18:11:40 [PositionControllerS1] INFO: S1: Low level breached. Need to BUY 12.74501425 BNB to reach 70% target.
+2025-04-21 18:11:40 [PositionControllerS1] INFO: S1: Condition met for BUY adjustment.
+2025-04-21 18:11:40 [PositionControllerS1] INFO: S1: Placing BUY order for 12.74500000 BNB at market price (approx 245.7)...
+2025-04-21 18:11:40 [PositionControllerS1] ERROR: S1: Failed to execute adjustment order (BUY 12.74501425): 'MockExchangeClient' object has no attribute 'create_market_order'
+Traceback (most recent call last):
+  File "/Users/slionx/Program/GridBNB-USDT/position_controller_s1.py", line 160, in _execute_s1_adjustment
+    order = await self.trader.exchange.create_market_order(
+                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AttributeError: 'MockExchangeClient' object has no attribute 'create_market_order'
+2025-04-21 18:11:45 [PositionControllerS1] INFO: S1: Low level breached. Need to BUY 12.74501425 BNB to reach 70% target.
+2025-04-21 18:11:45 [PositionControllerS1] INFO: S1: Condition met for BUY adjustment.
+2025-04-21 18:11:45 [PositionControllerS1] INFO: S1: Placing BUY order for 12.74500000 BNB at market price (approx 245.7)...
+2025-04-21 18:11:45 [PositionControllerS1] ERROR: S1: Failed to execute adjustment order (BUY 12.74501425): 'MockExchangeClient' object has no attribute 'create_market_order'
+Traceback (most recent call last):
+  File "/Users/slionx/Program/GridBNB-USDT/position_controller_s1.py", line 160, in _execute_s1_adjustment
+    order = await self.trader.exchange.create_market_order(
+                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AttributeError: 'MockExchangeClient' object has no attribute 'create_market_order'
+2025-04-21 18:11:50 [PositionControllerS1] INFO: S1: Low level breached. Need to BUY 12.74501425 BNB to reach 70% target.
+2025-04-21 18:11:50 [PositionControllerS1] INFO: S1: Condition met for BUY adjustment.
+2025-04-21 18:11:50 [PositionControllerS1] INFO: S1: Placing BUY order for 12.74500000 BNB at market price (approx 245.7)...
+2025-04-21 18:11:50 [PositionControllerS1] ERROR: S1: Failed to execute adjustment order (BUY 12.74501425): 'MockExchangeClient' object has no attribute 'create_market_order'
+Traceback (most recent call last):
+  File "/Users/slionx/Program/GridBNB-USDT/position_controller_s1.py", line 160, in _execute_s1_adjustment
+    order = await self.trader.exchange.create_market_order(
+                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AttributeError: 'MockExchangeClient' object has no attribute 'create_market_order'
+2025-04-21 18:11:55 [PositionControllerS1] INFO: S1: Low level breached. Need to BUY 12.74501425 BNB to reach 70% target.
+2025-04-21 18:11:55 [PositionControllerS1] INFO: S1: Condition met for BUY adjustment.
+2025-04-21 18:11:55 [PositionControllerS1] INFO: S1: Placing BUY order for 12.74500000 BNB at market price (approx 245.7)...
+2025-04-21 18:11:55 [PositionControllerS1] ERROR: S1: Failed to execute adjustment order (BUY 12.74501425): 'MockExchangeClient' object has no attribute 'create_market_order'
+Traceback (most recent call last):
+  File "/Users/slionx/Program/GridBNB-USDT/position_controller_s1.py", line 160, in _execute_s1_adjustment
+    order = await self.trader.exchange.create_market_order(
+                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AttributeError: 'MockExchangeClient' object has no attribute 'create_market_order'
+2025-04-21 18:12:00 [PositionControllerS1] INFO: S1: Low level breached. Need to BUY 12.74501425 BNB to reach 70% target.
+2025-04-21 18:12:00 [PositionControllerS1] INFO: S1: Condition met for BUY adjustment.
+2025-04-21 18:12:00 [PositionControllerS1] INFO: S1: Placing BUY order for 12.74500000 BNB at market price (approx 245.7)...
+2025-04-21 18:12:00 [PositionControllerS1] ERROR: S1: Failed to execute adjustment order (BUY 12.74501425): 'MockExchangeClient' object has no attribute 'create_market_order'
+Traceback (most recent call last):
+  File "/Users/slionx/Program/GridBNB-USDT/position_controller_s1.py", line 160, in _execute_s1_adjustment
+    order = await self.trader.exchange.create_market_order(
+                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AttributeError: 'MockExchangeClient' object has no attribute 'create_market_order'
+2025-04-21 18:12:05 [PositionControllerS1] INFO: S1: Low level breached. Need to BUY 12.74501425 BNB to reach 70% target.
+2025-04-21 18:12:05 [PositionControllerS1] INFO: S1: Condition met for BUY adjustment.
+2025-04-21 18:12:05 [PositionControllerS1] INFO: S1: Placing BUY order for 12.74500000 BNB at market price (approx 245.7)...
+2025-04-21 18:12:05 [PositionControllerS1] ERROR: S1: Failed to execute adjustment order (BUY 12.74501425): 'MockExchangeClient' object has no attribute 'create_market_order'
+Traceback (most recent call last):
+  File "/Users/slionx/Program/GridBNB-USDT/position_controller_s1.py", line 160, in _execute_s1_adjustment
+    order = await self.trader.exchange.create_market_order(
+                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AttributeError: 'MockExchangeClient' object has no attribute 'create_market_order'
+2025-04-21 18:12:10 [PositionControllerS1] INFO: S1: Low level breached. Need to BUY 12.74501425 BNB to reach 70% target.
+2025-04-21 18:12:10 [PositionControllerS1] INFO: S1: Condition met for BUY adjustment.
+2025-04-21 18:12:10 [PositionControllerS1] INFO: S1: Placing BUY order for 12.74500000 BNB at market price (approx 245.7)...
+2025-04-21 18:12:10 [PositionControllerS1] ERROR: S1: Failed to execute adjustment order (BUY 12.74501425): 'MockExchangeClient' object has no attribute 'create_market_order'
+Traceback (most recent call last):
+  File "/Users/slionx/Program/GridBNB-USDT/position_controller_s1.py", line 160, in _execute_s1_adjustment
+    order = await self.trader.exchange.create_market_order(
+                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AttributeError: 'MockExchangeClient' object has no attribute 'create_market_order'
+2025-04-21 18:12:15 [PositionControllerS1] INFO: S1: Low level breached. Need to BUY 12.74501425 BNB to reach 70% target.
+2025-04-21 18:12:15 [PositionControllerS1] INFO: S1: Condition met for BUY adjustment.
+2025-04-21 18:12:15 [PositionControllerS1] INFO: S1: Placing BUY order for 12.74500000 BNB at market price (approx 245.7)...
+2025-04-21 18:12:15 [PositionControllerS1] ERROR: S1: Failed to execute adjustment order (BUY 12.74501425): 'MockExchangeClient' object has no attribute 'create_market_order'
+Traceback (most recent call last):
+  File "/Users/slionx/Program/GridBNB-USDT/position_controller_s1.py", line 160, in _execute_s1_adjustment
+    order = await self.trader.exchange.create_market_order(
+                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AttributeError: 'MockExchangeClient' object has no attribute 'create_market_order'
+2025-04-21 18:12:20 [PositionControllerS1] INFO: S1: Low level breached. Need to BUY 12.74501425 BNB to reach 70% target.
+2025-04-21 18:12:20 [PositionControllerS1] INFO: S1: Condition met for BUY adjustment.
+2025-04-21 18:12:20 [PositionControllerS1] INFO: S1: Placing BUY order for 12.74500000 BNB at market price (approx 245.7)...
+2025-04-21 18:12:20 [PositionControllerS1] ERROR: S1: Failed to execute adjustment order (BUY 12.74501425): 'MockExchangeClient' object has no attribute 'create_market_order'
+Traceback (most recent call last):
+  File "/Users/slionx/Program/GridBNB-USDT/position_controller_s1.py", line 160, in _execute_s1_adjustment
+    order = await self.trader.exchange.create_market_order(
+                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AttributeError: 'MockExchangeClient' object has no attribute 'create_market_order'
+2025-04-21 18:12:25 [PositionControllerS1] INFO: S1: Low level breached. Need to BUY 12.74501425 BNB to reach 70% target.
+2025-04-21 18:12:25 [PositionControllerS1] INFO: S1: Condition met for BUY adjustment.
+2025-04-21 18:12:25 [PositionControllerS1] INFO: S1: Placing BUY order for 12.74500000 BNB at market price (approx 245.7)...
+2025-04-21 18:12:25 [PositionControllerS1] ERROR: S1: Failed to execute adjustment order (BUY 12.74501425): 'MockExchangeClient' object has no attribute 'create_market_order'
+Traceback (most recent call last):
+  File "/Users/slionx/Program/GridBNB-USDT/position_controller_s1.py", line 160, in _execute_s1_adjustment
+    order = await self.trader.exchange.create_market_order(
+                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AttributeError: 'MockExchangeClient' object has no attribute 'create_market_order'
+2025-04-21 18:12:30 [PositionControllerS1] INFO: S1: Low level breached. Need to BUY 12.74501425 BNB to reach 70% target.
+2025-04-21 18:12:30 [PositionControllerS1] INFO: S1: Condition met for BUY adjustment.
+2025-04-21 18:12:30 [PositionControllerS1] INFO: S1: Placing BUY order for 12.74500000 BNB at market price (approx 245.7)...
+2025-04-21 18:12:30 [PositionControllerS1] ERROR: S1: Failed to execute adjustment order (BUY 12.74501425): 'MockExchangeClient' object has no attribute 'create_market_order'
+Traceback (most recent call last):
+  File "/Users/slionx/Program/GridBNB-USDT/position_controller_s1.py", line 160, in _execute_s1_adjustment
+    order = await self.trader.exchange.create_market_order(
+                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AttributeError: 'MockExchangeClient' object has no attribute 'create_market_order'
+2025-04-21 18:12:36 [PositionControllerS1] INFO: S1: Low level breached. Need to BUY 12.74501425 BNB to reach 70% target.
+2025-04-21 18:12:36 [PositionControllerS1] INFO: S1: Condition met for BUY adjustment.
+2025-04-21 18:12:36 [PositionControllerS1] INFO: S1: Placing BUY order for 12.74500000 BNB at market price (approx 245.7)...
+2025-04-21 18:12:36 [PositionControllerS1] ERROR: S1: Failed to execute adjustment order (BUY 12.74501425): 'MockExchangeClient' object has no attribute 'create_market_order'
+Traceback (most recent call last):
+  File "/Users/slionx/Program/GridBNB-USDT/position_controller_s1.py", line 160, in _execute_s1_adjustment
+    order = await self.trader.exchange.create_market_order(
+                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AttributeError: 'MockExchangeClient' object has no attribute 'create_market_order'
+2025-04-21 18:12:41 [PositionControllerS1] INFO: S1: Low level breached. Need to BUY 12.74501425 BNB to reach 70% target.
+2025-04-21 18:12:41 [PositionControllerS1] INFO: S1: Condition met for BUY adjustment.
+2025-04-21 18:12:41 [PositionControllerS1] INFO: S1: Placing BUY order for 12.74500000 BNB at market price (approx 245.7)...
+2025-04-21 18:12:41 [PositionControllerS1] ERROR: S1: Failed to execute adjustment order (BUY 12.74501425): 'MockExchangeClient' object has no attribute 'create_market_order'
+Traceback (most recent call last):
+  File "/Users/slionx/Program/GridBNB-USDT/position_controller_s1.py", line 160, in _execute_s1_adjustment
+    order = await self.trader.exchange.create_market_order(
+                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AttributeError: 'MockExchangeClient' object has no attribute 'create_market_order'
+2025-04-21 18:12:46 [PositionControllerS1] INFO: S1: Low level breached. Need to BUY 12.74501425 BNB to reach 70% target.
+2025-04-21 18:12:46 [PositionControllerS1] INFO: S1: Condition met for BUY adjustment.
+2025-04-21 18:12:46 [PositionControllerS1] INFO: S1: Placing BUY order for 12.74500000 BNB at market price (approx 245.7)...
+2025-04-21 18:12:46 [PositionControllerS1] ERROR: S1: Failed to execute adjustment order (BUY 12.74501425): 'MockExchangeClient' object has no attribute 'create_market_order'
+Traceback (most recent call last):
+  File "/Users/slionx/Program/GridBNB-USDT/position_controller_s1.py", line 160, in _execute_s1_adjustment
+    order = await self.trader.exchange.create_market_order(
+                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AttributeError: 'MockExchangeClient' object has no attribute 'create_market_order'
+2025-04-21 18:12:48 [root] INFO: 交易所连接已关闭
+2025-04-21 18:16:00 [root] INFO: ==================================================
+2025-04-21 18:16:00 [root] INFO: 网格交易系统启动
+2025-04-21 18:16:00 [root] INFO: ==================================================
+2025-04-21 18:16:00 [PositionControllerS1] INFO: S1 Position Controller initialized. Lookback=52 days, Sell Target=50.0%, Buy Target=70.0%.
+2025-04-21 18:16:00 [GridTrader] INFO: 正在加载市场数据...
+2025-04-21 18:16:00 [GridTrader] INFO: 总资产: 6228.50 USDT | 现货: 6228.50 USDT (BNB: 5.0000, USDT: 5000.00) | 理财: 0.00 USDT (BNB: 0.0000, USDT: 0.00)
+2025-04-21 18:16:00 [GridTrader] INFO: 发现可划转USDT: 4003.44
+2025-04-21 18:16:00 [GridTrader] ERROR: 申购USDT到理财失败: 'MockExchangeClient' object has no attribute 'transfer_to_savings'
+2025-04-21 18:16:00 [GridTrader] INFO: 发现可划转BNB: 0.9439967439967436
+2025-04-21 18:16:00 [GridTrader] ERROR: 申购BNB到理财失败: 'MockExchangeClient' object has no attribute 'transfer_to_savings'
+2025-04-21 18:16:00 [GridTrader] INFO: 资金分配完成
+USDT: 5000.00
+BNB: 5.0000
+2025-04-21 18:16:00 [GridTrader] INFO: 使用实时基准价: 245.7
+2025-04-21 18:16:00 [GridTrader] INFO: 初始化完成 | 交易对: BNB/USDT | 基准价: 245.7
+2025-04-21 18:16:00 [root] ERROR: 未配置PUSHPLUS_TOKEN，无法发送通知
+2025-04-21 18:16:00 [GridTrader] INFO: 市场当前价: 245.7000 | 价差: +0.00%
+2025-04-21 18:16:00 [GridTrader] INFO: 正在获取最近10条交易记录...
+2025-04-21 18:16:00 [GridTrader] INFO: 未能获取到最新的交易记录，将使用本地历史。
+2025-04-21 18:16:00 [PositionControllerS1] INFO: S1: Time to update daily high/low levels...
+2025-04-21 18:16:00 [PositionControllerS1] INFO: S1 Levels Updated: High=634.5000, Low=508.0000
+2025-04-21 18:16:00 [PositionControllerS1] INFO: S1: Low level breached. Need to BUY 12.74501425 BNB to reach 70% target.
+2025-04-21 18:16:00 [PositionControllerS1] INFO: S1: Condition met for BUY adjustment.
+2025-04-21 18:16:00 [PositionControllerS1] INFO: S1: Placing BUY order for 12.74500000 BNB at market price (approx 245.7)...
+2025-04-21 18:16:00 [PositionControllerS1] ERROR: S1: Failed to execute adjustment order (BUY 12.74501425): 'MockExchangeClient' object has no attribute 'create_market_order'
+Traceback (most recent call last):
+  File "/Users/slionx/Program/GridBNB-USDT/position_controller_s1.py", line 160, in _execute_s1_adjustment
+    order = await self.trader.exchange.create_market_order(
+                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AttributeError: 'MockExchangeClient' object has no attribute 'create_market_order'
+2025-04-21 18:16:00 [root] INFO: Web服务已启动:
+2025-04-21 18:16:00 [root] INFO: - 本地访问: http://localhost:58181
+2025-04-21 18:16:00 [root] INFO: - 局域网访问: http://0.0.0.0:58181
+2025-04-21 18:16:05 [PositionControllerS1] INFO: S1: Low level breached. Need to BUY 12.74501425 BNB to reach 70% target.
+2025-04-21 18:16:05 [PositionControllerS1] INFO: S1: Condition met for BUY adjustment.
+2025-04-21 18:16:05 [PositionControllerS1] INFO: S1: Placing BUY order for 12.74500000 BNB at market price (approx 245.7)...
+2025-04-21 18:16:05 [PositionControllerS1] ERROR: S1: Failed to execute adjustment order (BUY 12.74501425): 'MockExchangeClient' object has no attribute 'create_market_order'
+Traceback (most recent call last):
+  File "/Users/slionx/Program/GridBNB-USDT/position_controller_s1.py", line 160, in _execute_s1_adjustment
+    order = await self.trader.exchange.create_market_order(
+                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AttributeError: 'MockExchangeClient' object has no attribute 'create_market_order'
+2025-04-21 18:16:10 [PositionControllerS1] INFO: S1: Low level breached. Need to BUY 12.74501425 BNB to reach 70% target.
+2025-04-21 18:16:10 [PositionControllerS1] INFO: S1: Condition met for BUY adjustment.
+2025-04-21 18:16:10 [PositionControllerS1] INFO: S1: Placing BUY order for 12.74500000 BNB at market price (approx 245.7)...
+2025-04-21 18:16:10 [PositionControllerS1] ERROR: S1: Failed to execute adjustment order (BUY 12.74501425): 'MockExchangeClient' object has no attribute 'create_market_order'
+Traceback (most recent call last):
+  File "/Users/slionx/Program/GridBNB-USDT/position_controller_s1.py", line 160, in _execute_s1_adjustment
+    order = await self.trader.exchange.create_market_order(
+                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AttributeError: 'MockExchangeClient' object has no attribute 'create_market_order'
+2025-04-21 18:16:15 [PositionControllerS1] INFO: S1: Low level breached. Need to BUY 12.74501425 BNB to reach 70% target.
+2025-04-21 18:16:15 [PositionControllerS1] INFO: S1: Condition met for BUY adjustment.
+2025-04-21 18:16:15 [PositionControllerS1] INFO: S1: Placing BUY order for 12.74500000 BNB at market price (approx 245.7)...
+2025-04-21 18:16:15 [PositionControllerS1] ERROR: S1: Failed to execute adjustment order (BUY 12.74501425): 'MockExchangeClient' object has no attribute 'create_market_order'
+Traceback (most recent call last):
+  File "/Users/slionx/Program/GridBNB-USDT/position_controller_s1.py", line 160, in _execute_s1_adjustment
+    order = await self.trader.exchange.create_market_order(
+                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AttributeError: 'MockExchangeClient' object has no attribute 'create_market_order'
+2025-04-21 18:16:20 [PositionControllerS1] INFO: S1: Low level breached. Need to BUY 12.74501425 BNB to reach 70% target.
+2025-04-21 18:16:20 [PositionControllerS1] INFO: S1: Condition met for BUY adjustment.
+2025-04-21 18:16:20 [PositionControllerS1] INFO: S1: Placing BUY order for 12.74500000 BNB at market price (approx 245.7)...
+2025-04-21 18:16:20 [PositionControllerS1] ERROR: S1: Failed to execute adjustment order (BUY 12.74501425): 'MockExchangeClient' object has no attribute 'create_market_order'
+Traceback (most recent call last):
+  File "/Users/slionx/Program/GridBNB-USDT/position_controller_s1.py", line 160, in _execute_s1_adjustment
+    order = await self.trader.exchange.create_market_order(
+                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AttributeError: 'MockExchangeClient' object has no attribute 'create_market_order'
+2025-04-21 18:16:25 [PositionControllerS1] INFO: S1: Low level breached. Need to BUY 12.74501425 BNB to reach 70% target.
+2025-04-21 18:16:25 [PositionControllerS1] INFO: S1: Condition met for BUY adjustment.
+2025-04-21 18:16:25 [PositionControllerS1] INFO: S1: Placing BUY order for 12.74500000 BNB at market price (approx 245.7)...
+2025-04-21 18:16:25 [PositionControllerS1] ERROR: S1: Failed to execute adjustment order (BUY 12.74501425): 'MockExchangeClient' object has no attribute 'create_market_order'
+Traceback (most recent call last):
+  File "/Users/slionx/Program/GridBNB-USDT/position_controller_s1.py", line 160, in _execute_s1_adjustment
+    order = await self.trader.exchange.create_market_order(
+                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AttributeError: 'MockExchangeClient' object has no attribute 'create_market_order'
+2025-04-21 18:16:30 [PositionControllerS1] INFO: S1: Low level breached. Need to BUY 12.74501425 BNB to reach 70% target.
+2025-04-21 18:16:30 [PositionControllerS1] INFO: S1: Condition met for BUY adjustment.
+2025-04-21 18:16:30 [PositionControllerS1] INFO: S1: Placing BUY order for 12.74500000 BNB at market price (approx 245.7)...
+2025-04-21 18:16:30 [PositionControllerS1] ERROR: S1: Failed to execute adjustment order (BUY 12.74501425): 'MockExchangeClient' object has no attribute 'create_market_order'
+Traceback (most recent call last):
+  File "/Users/slionx/Program/GridBNB-USDT/position_controller_s1.py", line 160, in _execute_s1_adjustment
+    order = await self.trader.exchange.create_market_order(
+                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AttributeError: 'MockExchangeClient' object has no attribute 'create_market_order'
+2025-04-21 18:16:35 [PositionControllerS1] INFO: S1: Low level breached. Need to BUY 12.74501425 BNB to reach 70% target.
+2025-04-21 18:16:35 [PositionControllerS1] INFO: S1: Condition met for BUY adjustment.
+2025-04-21 18:16:35 [PositionControllerS1] INFO: S1: Placing BUY order for 12.74500000 BNB at market price (approx 245.7)...
+2025-04-21 18:16:35 [PositionControllerS1] ERROR: S1: Failed to execute adjustment order (BUY 12.74501425): 'MockExchangeClient' object has no attribute 'create_market_order'
+Traceback (most recent call last):
+  File "/Users/slionx/Program/GridBNB-USDT/position_controller_s1.py", line 160, in _execute_s1_adjustment
+    order = await self.trader.exchange.create_market_order(
+                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AttributeError: 'MockExchangeClient' object has no attribute 'create_market_order'
+2025-04-21 18:16:40 [PositionControllerS1] INFO: S1: Low level breached. Need to BUY 12.74501425 BNB to reach 70% target.
+2025-04-21 18:16:40 [PositionControllerS1] INFO: S1: Condition met for BUY adjustment.
+2025-04-21 18:16:40 [PositionControllerS1] INFO: S1: Placing BUY order for 12.74500000 BNB at market price (approx 245.7)...
+2025-04-21 18:16:40 [PositionControllerS1] ERROR: S1: Failed to execute adjustment order (BUY 12.74501425): 'MockExchangeClient' object has no attribute 'create_market_order'
+Traceback (most recent call last):
+  File "/Users/slionx/Program/GridBNB-USDT/position_controller_s1.py", line 160, in _execute_s1_adjustment
+    order = await self.trader.exchange.create_market_order(
+                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AttributeError: 'MockExchangeClient' object has no attribute 'create_market_order'
+2025-04-21 18:16:45 [PositionControllerS1] INFO: S1: Low level breached. Need to BUY 12.74501425 BNB to reach 70% target.
+2025-04-21 18:16:45 [PositionControllerS1] INFO: S1: Condition met for BUY adjustment.
+2025-04-21 18:16:45 [PositionControllerS1] INFO: S1: Placing BUY order for 12.74500000 BNB at market price (approx 245.7)...
+2025-04-21 18:16:45 [PositionControllerS1] ERROR: S1: Failed to execute adjustment order (BUY 12.74501425): 'MockExchangeClient' object has no attribute 'create_market_order'
+Traceback (most recent call last):
+  File "/Users/slionx/Program/GridBNB-USDT/position_controller_s1.py", line 160, in _execute_s1_adjustment
+    order = await self.trader.exchange.create_market_order(
+                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AttributeError: 'MockExchangeClient' object has no attribute 'create_market_order'
+2025-04-21 18:16:50 [PositionControllerS1] INFO: S1: Low level breached. Need to BUY 12.74501425 BNB to reach 70% target.
+2025-04-21 18:16:50 [PositionControllerS1] INFO: S1: Condition met for BUY adjustment.
+2025-04-21 18:16:50 [PositionControllerS1] INFO: S1: Placing BUY order for 12.74500000 BNB at market price (approx 245.7)...
+2025-04-21 18:16:50 [PositionControllerS1] ERROR: S1: Failed to execute adjustment order (BUY 12.74501425): 'MockExchangeClient' object has no attribute 'create_market_order'
+Traceback (most recent call last):
+  File "/Users/slionx/Program/GridBNB-USDT/position_controller_s1.py", line 160, in _execute_s1_adjustment
+    order = await self.trader.exchange.create_market_order(
+                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AttributeError: 'MockExchangeClient' object has no attribute 'create_market_order'
+2025-04-21 18:16:55 [PositionControllerS1] INFO: S1: Low level breached. Need to BUY 12.74501425 BNB to reach 70% target.
+2025-04-21 18:16:55 [PositionControllerS1] INFO: S1: Condition met for BUY adjustment.
+2025-04-21 18:16:55 [PositionControllerS1] INFO: S1: Placing BUY order for 12.74500000 BNB at market price (approx 245.7)...
+2025-04-21 18:16:55 [PositionControllerS1] ERROR: S1: Failed to execute adjustment order (BUY 12.74501425): 'MockExchangeClient' object has no attribute 'create_market_order'
+Traceback (most recent call last):
+  File "/Users/slionx/Program/GridBNB-USDT/position_controller_s1.py", line 160, in _execute_s1_adjustment
+    order = await self.trader.exchange.create_market_order(
+                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AttributeError: 'MockExchangeClient' object has no attribute 'create_market_order'
+2025-04-21 18:17:00 [PositionControllerS1] INFO: S1: Low level breached. Need to BUY 12.74501425 BNB to reach 70% target.
+2025-04-21 18:17:00 [PositionControllerS1] INFO: S1: Condition met for BUY adjustment.
+2025-04-21 18:17:00 [PositionControllerS1] INFO: S1: Placing BUY order for 12.74500000 BNB at market price (approx 245.7)...
+2025-04-21 18:17:00 [PositionControllerS1] ERROR: S1: Failed to execute adjustment order (BUY 12.74501425): 'MockExchangeClient' object has no attribute 'create_market_order'
+Traceback (most recent call last):
+  File "/Users/slionx/Program/GridBNB-USDT/position_controller_s1.py", line 160, in _execute_s1_adjustment
+    order = await self.trader.exchange.create_market_order(
+                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AttributeError: 'MockExchangeClient' object has no attribute 'create_market_order'
+2025-04-21 18:17:05 [root] INFO: 交易所连接已关闭
+2025-04-21 18:17:47 [root] INFO: ==================================================
+2025-04-21 18:17:47 [root] INFO: 网格交易系统启动
+2025-04-21 18:17:47 [root] INFO: ==================================================
+2025-04-21 18:17:47 [PositionControllerS1] INFO: S1 Position Controller initialized. Lookback=52 days, Sell Target=50.0%, Buy Target=70.0%.
+2025-04-21 18:17:47 [GridTrader] INFO: 正在加载市场数据...
+2025-04-21 18:17:47 [GridTrader] INFO: 总资产: 6228.50 USDT | 现货: 6228.50 USDT (BNB: 5.0000, USDT: 5000.00) | 理财: 0.00 USDT (BNB: 0.0000, USDT: 0.00)
+2025-04-21 18:17:47 [GridTrader] INFO: 发现可划转USDT: 4003.44
+2025-04-21 18:17:47 [GridTrader] ERROR: 申购USDT到理财失败: 'MockExchangeClient' object has no attribute 'transfer_to_savings'
+2025-04-21 18:17:47 [GridTrader] INFO: 发现可划转BNB: 0.9439967439967436
+2025-04-21 18:17:47 [GridTrader] ERROR: 申购BNB到理财失败: 'MockExchangeClient' object has no attribute 'transfer_to_savings'
+2025-04-21 18:17:47 [GridTrader] INFO: 资金分配完成
+USDT: 5000.00
+BNB: 5.0000
+2025-04-21 18:17:47 [GridTrader] INFO: 使用实时基准价: 245.7
+2025-04-21 18:17:47 [GridTrader] INFO: 初始化完成 | 交易对: BNB/USDT | 基准价: 245.7
+2025-04-21 18:17:47 [root] ERROR: 未配置PUSHPLUS_TOKEN，无法发送通知
+2025-04-21 18:17:47 [GridTrader] INFO: 市场当前价: 245.7000 | 价差: +0.00%
+2025-04-21 18:17:47 [GridTrader] INFO: 正在获取最近10条交易记录...
+2025-04-21 18:17:47 [GridTrader] INFO: 未能获取到最新的交易记录，将使用本地历史。
+2025-04-21 18:17:47 [PositionControllerS1] INFO: S1: Time to update daily high/low levels...
+2025-04-21 18:17:47 [PositionControllerS1] INFO: S1 Levels Updated: High=634.5000, Low=508.0000
+2025-04-21 18:17:47 [PositionControllerS1] INFO: S1: Low level breached. Need to BUY 12.74501425 BNB to reach 70% target.
+2025-04-21 18:17:47 [PositionControllerS1] INFO: S1: Condition met for BUY adjustment.
+2025-04-21 18:17:47 [PositionControllerS1] INFO: S1: Placing BUY order for 12.74500000 BNB at market price (approx 245.7)...
+2025-04-21 18:17:47 [PositionControllerS1] ERROR: S1: Failed to execute adjustment order (BUY 12.74501425): 'MockExchangeClient' object has no attribute 'create_market_order'
+Traceback (most recent call last):
+  File "/Users/slionx/Program/GridBNB-USDT/position_controller_s1.py", line 160, in _execute_s1_adjustment
+    order = await self.trader.exchange.create_market_order(
+                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AttributeError: 'MockExchangeClient' object has no attribute 'create_market_order'
+2025-04-21 18:17:47 [root] INFO: Web服务已启动:
+2025-04-21 18:17:47 [root] INFO: - 本地访问: http://localhost:58181
+2025-04-21 18:17:47 [root] INFO: - 局域网访问: http://0.0.0.0:58181
+2025-04-21 18:17:52 [PositionControllerS1] INFO: S1: Low level breached. Need to BUY 12.74501425 BNB to reach 70% target.
+2025-04-21 18:17:52 [PositionControllerS1] INFO: S1: Condition met for BUY adjustment.
+2025-04-21 18:17:52 [PositionControllerS1] INFO: S1: Placing BUY order for 12.74500000 BNB at market price (approx 245.7)...
+2025-04-21 18:17:52 [PositionControllerS1] ERROR: S1: Failed to execute adjustment order (BUY 12.74501425): 'MockExchangeClient' object has no attribute 'create_market_order'
+Traceback (most recent call last):
+  File "/Users/slionx/Program/GridBNB-USDT/position_controller_s1.py", line 160, in _execute_s1_adjustment
+    order = await self.trader.exchange.create_market_order(
+                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AttributeError: 'MockExchangeClient' object has no attribute 'create_market_order'
+2025-04-21 18:17:57 [PositionControllerS1] INFO: S1: Low level breached. Need to BUY 12.74501425 BNB to reach 70% target.
+2025-04-21 18:17:57 [PositionControllerS1] INFO: S1: Condition met for BUY adjustment.
+2025-04-21 18:17:57 [PositionControllerS1] INFO: S1: Placing BUY order for 12.74500000 BNB at market price (approx 245.7)...
+2025-04-21 18:17:57 [PositionControllerS1] ERROR: S1: Failed to execute adjustment order (BUY 12.74501425): 'MockExchangeClient' object has no attribute 'create_market_order'
+Traceback (most recent call last):
+  File "/Users/slionx/Program/GridBNB-USDT/position_controller_s1.py", line 160, in _execute_s1_adjustment
+    order = await self.trader.exchange.create_market_order(
+                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AttributeError: 'MockExchangeClient' object has no attribute 'create_market_order'
+2025-04-21 18:17:58 [root] INFO: 交易所连接已关闭
+2025-04-21 18:18:19 [root] INFO: ==================================================
+2025-04-21 18:18:19 [root] INFO: 网格交易系统启动
+2025-04-21 18:18:19 [root] INFO: ==================================================
+2025-04-21 18:18:19 [PositionControllerS1] INFO: S1 Position Controller initialized. Lookback=52 days, Sell Target=50.0%, Buy Target=70.0%.
+2025-04-21 18:18:19 [GridTrader] INFO: 正在加载市场数据...
+2025-04-21 18:18:19 [GridTrader] INFO: 总资产: 6228.50 USDT | 现货: 6228.50 USDT (BNB: 5.0000, USDT: 5000.00) | 理财: 0.00 USDT (BNB: 0.0000, USDT: 0.00)
+2025-04-21 18:18:19 [GridTrader] INFO: 发现可划转USDT: 4003.44
+2025-04-21 18:18:19 [GridTrader] ERROR: 申购USDT到理财失败: 'MockExchangeClient' object has no attribute 'transfer_to_savings'
+2025-04-21 18:18:19 [GridTrader] INFO: 发现可划转BNB: 0.9439967439967436
+2025-04-21 18:18:19 [GridTrader] ERROR: 申购BNB到理财失败: 'MockExchangeClient' object has no attribute 'transfer_to_savings'
+2025-04-21 18:18:19 [GridTrader] INFO: 资金分配完成
+USDT: 5000.00
+BNB: 5.0000
+2025-04-21 18:18:19 [GridTrader] INFO: 使用实时基准价: 245.7
+2025-04-21 18:18:19 [GridTrader] INFO: 初始化完成 | 交易对: BNB/USDT | 基准价: 245.7
+2025-04-21 18:18:19 [root] ERROR: 未配置PUSHPLUS_TOKEN，无法发送通知
+2025-04-21 18:18:19 [GridTrader] INFO: 市场当前价: 245.7000 | 价差: +0.00%
+2025-04-21 18:18:19 [GridTrader] INFO: 正在获取最近10条交易记录...
+2025-04-21 18:18:19 [GridTrader] INFO: 未能获取到最新的交易记录，将使用本地历史。
+2025-04-21 18:18:19 [PositionControllerS1] INFO: S1: Time to update daily high/low levels...
+2025-04-21 18:18:19 [PositionControllerS1] INFO: S1 Levels Updated: High=634.5000, Low=508.0000
+2025-04-21 18:18:19 [PositionControllerS1] INFO: S1: Low level breached. Need to BUY 12.74501425 BNB to reach 70% target.
+2025-04-21 18:18:19 [PositionControllerS1] INFO: S1: Condition met for BUY adjustment.
+2025-04-21 18:18:19 [PositionControllerS1] INFO: S1: Placing BUY order for 12.74500000 BNB at market price (approx 245.7)...
+2025-04-21 18:18:19 [PositionControllerS1] ERROR: S1: Failed to execute adjustment order (BUY 12.74501425): 'MockExchangeClient' object has no attribute 'create_market_order'
+Traceback (most recent call last):
+  File "/Users/slionx/Program/GridBNB-USDT/position_controller_s1.py", line 160, in _execute_s1_adjustment
+    order = await self.trader.exchange.create_market_order(
+                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AttributeError: 'MockExchangeClient' object has no attribute 'create_market_order'
+2025-04-21 18:18:19 [root] INFO: Web服务已启动:
+2025-04-21 18:18:19 [root] INFO: - 本地访问: http://localhost:58181
+2025-04-21 18:18:19 [root] INFO: - 局域网访问: http://0.0.0.0:58181
+2025-04-21 18:18:24 [PositionControllerS1] INFO: S1: Low level breached. Need to BUY 12.74501425 BNB to reach 70% target.
+2025-04-21 18:18:24 [PositionControllerS1] INFO: S1: Condition met for BUY adjustment.
+2025-04-21 18:18:24 [PositionControllerS1] INFO: S1: Placing BUY order for 12.74500000 BNB at market price (approx 245.7)...
+2025-04-21 18:18:24 [PositionControllerS1] ERROR: S1: Failed to execute adjustment order (BUY 12.74501425): 'MockExchangeClient' object has no attribute 'create_market_order'
+Traceback (most recent call last):
+  File "/Users/slionx/Program/GridBNB-USDT/position_controller_s1.py", line 160, in _execute_s1_adjustment
+    order = await self.trader.exchange.create_market_order(
+                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AttributeError: 'MockExchangeClient' object has no attribute 'create_market_order'
+2025-04-21 18:18:25 [root] INFO: 交易所连接已关闭
+2025-04-21 18:18:28 [root] INFO: ==================================================
+2025-04-21 18:18:28 [root] INFO: 网格交易系统启动
+2025-04-21 18:18:28 [root] INFO: ==================================================
+2025-04-21 18:18:28 [PositionControllerS1] INFO: S1 Position Controller initialized. Lookback=52 days, Sell Target=50.0%, Buy Target=70.0%.
+2025-04-21 18:18:28 [GridTrader] INFO: 正在加载市场数据...
+2025-04-21 18:18:28 [GridTrader] INFO: 总资产: 6228.50 USDT | 现货: 6228.50 USDT (BNB: 5.0000, USDT: 5000.00) | 理财: 0.00 USDT (BNB: 0.0000, USDT: 0.00)
+2025-04-21 18:18:28 [GridTrader] INFO: 发现可划转USDT: 4003.44
+2025-04-21 18:18:28 [GridTrader] ERROR: 申购USDT到理财失败: 'MockExchangeClient' object has no attribute 'transfer_to_savings'
+2025-04-21 18:18:28 [GridTrader] INFO: 发现可划转BNB: 0.9439967439967436
+2025-04-21 18:18:28 [GridTrader] ERROR: 申购BNB到理财失败: 'MockExchangeClient' object has no attribute 'transfer_to_savings'
+2025-04-21 18:18:28 [GridTrader] INFO: 资金分配完成
+USDT: 5000.00
+BNB: 5.0000
+2025-04-21 18:18:28 [GridTrader] INFO: 使用实时基准价: 245.7
+2025-04-21 18:18:28 [GridTrader] INFO: 初始化完成 | 交易对: BNB/USDT | 基准价: 245.7
+2025-04-21 18:18:28 [root] ERROR: 未配置PUSHPLUS_TOKEN，无法发送通知
+2025-04-21 18:18:28 [GridTrader] INFO: 市场当前价: 245.7000 | 价差: +0.00%
+2025-04-21 18:18:28 [GridTrader] INFO: 正在获取最近10条交易记录...
+2025-04-21 18:18:28 [GridTrader] INFO: 未能获取到最新的交易记录，将使用本地历史。
+2025-04-21 18:18:28 [PositionControllerS1] INFO: S1: Time to update daily high/low levels...
+2025-04-21 18:18:28 [PositionControllerS1] INFO: S1 Levels Updated: High=634.5000, Low=508.0000
+2025-04-21 18:18:28 [PositionControllerS1] INFO: S1: Low level breached. Need to BUY 12.74501425 BNB to reach 70% target.
+2025-04-21 18:18:28 [PositionControllerS1] INFO: S1: Condition met for BUY adjustment.
+2025-04-21 18:18:28 [PositionControllerS1] INFO: S1: Placing BUY order for 12.74500000 BNB at market price (approx 245.7)...
+2025-04-21 18:18:28 [PositionControllerS1] ERROR: S1: Failed to execute adjustment order (BUY 12.74501425): 'MockExchangeClient' object has no attribute 'create_market_order'
+Traceback (most recent call last):
+  File "/Users/slionx/Program/GridBNB-USDT/position_controller_s1.py", line 160, in _execute_s1_adjustment
+    order = await self.trader.exchange.create_market_order(
+                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AttributeError: 'MockExchangeClient' object has no attribute 'create_market_order'
+2025-04-21 18:18:28 [root] INFO: Web服务已启动:
+2025-04-21 18:18:28 [root] INFO: - 本地访问: http://localhost:58181
+2025-04-21 18:18:28 [root] INFO: - 局域网访问: http://0.0.0.0:58181
+2025-04-21 18:18:33 [PositionControllerS1] INFO: S1: Low level breached. Need to BUY 12.74501425 BNB to reach 70% target.
+2025-04-21 18:18:33 [PositionControllerS1] INFO: S1: Condition met for BUY adjustment.
+2025-04-21 18:18:33 [PositionControllerS1] INFO: S1: Placing BUY order for 12.74500000 BNB at market price (approx 245.7)...
+2025-04-21 18:18:33 [PositionControllerS1] ERROR: S1: Failed to execute adjustment order (BUY 12.74501425): 'MockExchangeClient' object has no attribute 'create_market_order'
+Traceback (most recent call last):
+  File "/Users/slionx/Program/GridBNB-USDT/position_controller_s1.py", line 160, in _execute_s1_adjustment
+    order = await self.trader.exchange.create_market_order(
+                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AttributeError: 'MockExchangeClient' object has no attribute 'create_market_order'
+2025-04-21 18:18:38 [PositionControllerS1] INFO: S1: Low level breached. Need to BUY 12.74501425 BNB to reach 70% target.
+2025-04-21 18:18:38 [PositionControllerS1] INFO: S1: Condition met for BUY adjustment.
+2025-04-21 18:18:38 [PositionControllerS1] INFO: S1: Placing BUY order for 12.74500000 BNB at market price (approx 245.7)...
+2025-04-21 18:18:38 [PositionControllerS1] ERROR: S1: Failed to execute adjustment order (BUY 12.74501425): 'MockExchangeClient' object has no attribute 'create_market_order'
+Traceback (most recent call last):
+  File "/Users/slionx/Program/GridBNB-USDT/position_controller_s1.py", line 160, in _execute_s1_adjustment
+    order = await self.trader.exchange.create_market_order(
+                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AttributeError: 'MockExchangeClient' object has no attribute 'create_market_order'
+2025-04-21 18:18:43 [PositionControllerS1] INFO: S1: Low level breached. Need to BUY 12.74501425 BNB to reach 70% target.
+2025-04-21 18:18:43 [PositionControllerS1] INFO: S1: Condition met for BUY adjustment.
+2025-04-21 18:18:43 [PositionControllerS1] INFO: S1: Placing BUY order for 12.74500000 BNB at market price (approx 245.7)...
+2025-04-21 18:18:43 [PositionControllerS1] ERROR: S1: Failed to execute adjustment order (BUY 12.74501425): 'MockExchangeClient' object has no attribute 'create_market_order'
+Traceback (most recent call last):
+  File "/Users/slionx/Program/GridBNB-USDT/position_controller_s1.py", line 160, in _execute_s1_adjustment
+    order = await self.trader.exchange.create_market_order(
+                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AttributeError: 'MockExchangeClient' object has no attribute 'create_market_order'
+2025-04-21 18:18:48 [PositionControllerS1] INFO: S1: Low level breached. Need to BUY 12.74501425 BNB to reach 70% target.
+2025-04-21 18:18:48 [PositionControllerS1] INFO: S1: Condition met for BUY adjustment.
+2025-04-21 18:18:48 [PositionControllerS1] INFO: S1: Placing BUY order for 12.74500000 BNB at market price (approx 245.7)...
+2025-04-21 18:18:48 [PositionControllerS1] ERROR: S1: Failed to execute adjustment order (BUY 12.74501425): 'MockExchangeClient' object has no attribute 'create_market_order'
+Traceback (most recent call last):
+  File "/Users/slionx/Program/GridBNB-USDT/position_controller_s1.py", line 160, in _execute_s1_adjustment
+    order = await self.trader.exchange.create_market_order(
+                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AttributeError: 'MockExchangeClient' object has no attribute 'create_market_order'
+2025-04-21 18:18:53 [PositionControllerS1] INFO: S1: Low level breached. Need to BUY 12.74501425 BNB to reach 70% target.
+2025-04-21 18:18:53 [PositionControllerS1] INFO: S1: Condition met for BUY adjustment.
+2025-04-21 18:18:53 [PositionControllerS1] INFO: S1: Placing BUY order for 12.74500000 BNB at market price (approx 245.7)...
+2025-04-21 18:18:53 [PositionControllerS1] ERROR: S1: Failed to execute adjustment order (BUY 12.74501425): 'MockExchangeClient' object has no attribute 'create_market_order'
+Traceback (most recent call last):
+  File "/Users/slionx/Program/GridBNB-USDT/position_controller_s1.py", line 160, in _execute_s1_adjustment
+    order = await self.trader.exchange.create_market_order(
+                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AttributeError: 'MockExchangeClient' object has no attribute 'create_market_order'
+2025-04-21 18:18:58 [PositionControllerS1] INFO: S1: Low level breached. Need to BUY 12.74501425 BNB to reach 70% target.
+2025-04-21 18:18:58 [PositionControllerS1] INFO: S1: Condition met for BUY adjustment.
+2025-04-21 18:18:58 [PositionControllerS1] INFO: S1: Placing BUY order for 12.74500000 BNB at market price (approx 245.7)...
+2025-04-21 18:18:58 [PositionControllerS1] ERROR: S1: Failed to execute adjustment order (BUY 12.74501425): 'MockExchangeClient' object has no attribute 'create_market_order'
+Traceback (most recent call last):
+  File "/Users/slionx/Program/GridBNB-USDT/position_controller_s1.py", line 160, in _execute_s1_adjustment
+    order = await self.trader.exchange.create_market_order(
+                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AttributeError: 'MockExchangeClient' object has no attribute 'create_market_order'
+2025-04-21 18:19:01 [root] INFO: 交易所连接已关闭

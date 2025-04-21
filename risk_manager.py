@@ -1,5 +1,6 @@
 import logging
 from config import MAX_POSITION_RATIO
+import traceback
 
 class AdvancedRiskManager:
     def __init__(self, trader):
@@ -37,6 +38,7 @@ class AdvancedRiskManager:
 
     async def _get_position_value(self):
         balance = await self.trader.exchange.fetch_balance()
+        print(f"[DEBUG][risk_manager._get_position_value] balance: {balance}\nTraceback:\n{''.join(traceback.format_stack(limit=5))}")
         funding_balance = await self.trader.exchange.fetch_funding_balance()
         if not self.trader.symbol_info:
             self.trader.trade_log.error("交易对信息未初始化")
@@ -53,17 +55,15 @@ class AdvancedRiskManager:
         try:
             position_value = await self._get_position_value()
             balance = await self.trader.exchange.fetch_balance()
+            print(f"[DEBUG][risk_manager._get_position_ratio] balance: {balance}\nTraceback:\n{''.join(traceback.format_stack(limit=5))}")
             funding_balance = await self.trader.exchange.fetch_funding_balance()
-            
             usdt_balance = (
                 float(balance.get('total', {}).get('USDT', 0)) +
                 float(funding_balance.get('USDT', 0))
             )
-            
             total_assets = position_value + usdt_balance
             if total_assets == 0:
                 return 0
-                
             ratio = position_value / total_assets
             self.logger.debug(
                 f"仓位计算 | "
@@ -74,7 +74,7 @@ class AdvancedRiskManager:
             )
             return ratio
         except Exception as e:
-            self.logger.error(f"计算仓位比例失败: {str(e)}")
+            self.logger.error(f"计算仓位比例失败: {str(e)}\n[DEBUG] balance: {balance if 'balance' in locals() else 'N/A'}\nTraceback:\n{''.join(traceback.format_exc())}")
             return 0
 
     async def check_market_sentiment(self):

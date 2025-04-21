@@ -5,6 +5,7 @@ import aiofiles
 import logging
 from datetime import datetime
 import psutil
+import csv
 
 class IPLogger:
     def __init__(self):
@@ -267,8 +268,32 @@ async def handle_log(request):
                         <pre>{content}</pre>
                     </div>
                 </div>
+
+                <!-- 回测结果卡片 -->
+                <div class="card mb-8">
+                    <h2 class="text-lg font-semibold mb-4">回测结果</h2>
+                    <div id="backtest-summary">加载中...</div>
+                    <div class="overflow-x-auto">
+                        <table class="min-w-full">
+                            <thead>
+                                <tr class="border-b">
+                                    <th class="text-left py-2">时间</th>
+                                    <th class="text-left py-2">方向</th>
+                                    <th class="text-left py-2">价格</th>
+                                    <th class="text-left py-2">数量</th>
+                                    <th class="text-left py-2">金额(USDT)</th>
+                                </tr>
+                            </thead>
+                            <tbody id="backtest-trades"></tbody>
+                        </table>
+                    </div>
+                    <div class="mt-4">
+                        <canvas id="equity-curve" height="120"></canvas>
+                    </div>
+                </div>
             </div>
 
+            <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
             <script>
                 async function updateStatus() {{
                     try {{
@@ -347,6 +372,42 @@ async def handle_log(request):
                 
                 // 页面加载时立即更新一次
                 updateStatus();
+
+                // 回测结果加载
+                async function loadBacktestResult() {{
+                    const resp = await fetch('/api/backtest_result');
+                    const data = await resp.json();
+                    // 填充表格
+                    const tbody = document.getElementById('backtest-trades');
+                    tbody.innerHTML = '';
+                    (data.trades || []).slice(-10).forEach(trade => {{
+                        const tr = document.createElement('tr');
+                        tr.innerHTML = `<td>${trade.timestamp}</td><td>${trade.side}</td><td>${parseFloat(trade.price).toFixed(2)}</td><td>${trade.amount}</td><td>${parseFloat(trade.cost).toFixed(2)}</td>`;
+                        tbody.appendChild(tr);
+                    }});
+                    // 资金曲线
+                    if (data.equity_curve && data.equity_curve.length > 0) {{
+                        const ctx = document.getElementById('equity-curve').getContext('2d');
+                        const labels = data.equity_curve.map(e => e.timestamp);
+                        const values = data.equity_curve.map(e => parseFloat(e.equity));
+                        new Chart(ctx, {{
+                            type: 'line',
+                            data: {{ labels, datasets: [{{ label: '资金曲线', data: values, borderColor: '#2563eb', fill: false }}] }},
+                            options: {{ responsive: true, plugins: {{ legend: {{ display: false }} }} }}
+                        }});
+                    }}
+                    // 简要统计
+                    const summary = document.getElementById('backtest-summary');
+                    if (data.trades && data.trades.length > 0) {{
+                        const first = data.trades[0];
+                        const last = data.trades[data.trades.length-1];
+                        const profit = (parseFloat(last.price) - parseFloat(first.price)) * (parseFloat(last.amount) || 1);
+                        summary.textContent = `总成交: ${data.trades.length} | 简单收益: ${profit.toFixed(2)} USDT`;
+                    }} else {{
+                        summary.textContent = '无回测数据';
+                    }}
+                }}
+                loadBacktestResult();
             </script>
         </body>
         </html>
@@ -442,6 +503,23 @@ async def handle_status(request):
         logging.error(f"获取状态数据失败: {str(e)}", exc_info=True)
         return web.json_response({"error": str(e)}, status=500)
 
+async def handle_backtest_result(request):
+    # 假定回测结果文件路径固定，可后续参数化
+    trades_path = 'backtest_trades.csv'
+    equity_path = 'backtest_equity_curve.csv'
+    result = {'trades': [], 'equity_curve': []}
+    # 读取成交记录
+    if os.path.exists(trades_path):
+        with open(trades_path, 'r', encoding='utf-8') as f:
+            reader = csv.DictReader(f)
+            result['trades'] = list(reader)
+    # 读取资金曲线
+    if os.path.exists(equity_path):
+        with open(equity_path, 'r', encoding='utf-8') as f:
+            reader = csv.DictReader(f)
+            result['equity_curve'] = list(reader)
+    return web.json_response(result)
+
 async def start_web_server(trader):
     app = web.Application()
     # 添加中间件处理无效请求
@@ -472,6 +550,7 @@ async def start_web_server(trader):
     app.router.add_get('/', handle_log)
     app.router.add_get('/api/logs', handle_log_content)
     app.router.add_get('/api/status', handle_status)
+    app.router.add_get('/api/backtest_result', handle_backtest_result)
     runner = web.AppRunner(app)
     await runner.setup()
     site = web.TCPSite(runner, '0.0.0.0', 58181)
