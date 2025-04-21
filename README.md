@@ -101,7 +101,7 @@ python main.py
 python main.py --mode simulate --init-usdt 10000
 
 # 回测模式，指定K线文件和初始资金
-python3 main.py --mode backtest --kline bnbusdt_1h.json --init-usdt 5000 --init-bnb 5
+python main.py --mode backtest --kline bnbusdt_1h.json --init-usdt 5000 --init-bnb 5
 ```
 
 ## 回测数据准备与结果导出

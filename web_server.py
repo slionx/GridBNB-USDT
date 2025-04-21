@@ -195,6 +195,20 @@ async def handle_log(request):
                             </div>
                         </div>
                     </div>
+                    <!-- 理财账户状况 -->
+                    <div class="card">
+                        <h2 class="text-lg font-semibold mb-4">理财账户</h2>
+                        <div class="space-y-2">
+                            <div class="flex justify-between">
+                                <span>USDT理财</span>
+                                <span class="status-value" id="savings-usdt">--</span>
+                            </div>
+                            <div class="flex justify-between">
+                                <span>BNB理财</span>
+                                <span class="status-value" id="savings-bnb">--</span>
+                            </div>
+                        </div>
+                    </div>
                 </div>
 
                 <!-- 系统资源监控 -->
@@ -262,7 +276,7 @@ async def handle_log(request):
                 </div>
 
                 <!-- 系统日志 -->
-                <div class="card">
+                <div class="card mb-8">
                     <h2 class="text-lg font-semibold mb-4">系统日志</h2>
                     <div class="log-container" id="log-content">
                         <pre>{content}</pre>
@@ -334,6 +348,11 @@ async def handle_log(request):
                             data.usdt_balance != null ? data.usdt_balance.toFixed(2) : '--';
                         document.querySelector('#bnb-balance').textContent = 
                             data.bnb_balance != null ? data.bnb_balance.toFixed(4) : '--';
+                        // 更新理财账户
+                        document.querySelector('#savings-usdt').textContent = 
+                            data.funding_balance && data.funding_balance.USDT != null ? data.funding_balance.USDT.toFixed(2) : '--';
+                        document.querySelector('#savings-bnb').textContent = 
+                            data.funding_balance && data.funding_balance.BNB != null ? data.funding_balance.BNB.toFixed(4) : '--';
                         
                         // 更新盈亏信息
                         const totalProfitElement = document.querySelector('#total-profit');
@@ -348,8 +367,8 @@ async def handle_log(request):
                         document.querySelector('#trade-history').innerHTML = data.trade_history.map(function(trade) {{ return ` 
                             <tr class="border-b">
                                 <td class="py-2">${{trade.timestamp}}</td>
-                                <td class="py-2 ${{trade.side === 'buy' ? 'text-green-500' : 'text-red-500'}}">
-                                    ${{trade.side === 'buy' ? '买入' : '卖出'}}
+                                <td class="py-2 ${{trade.side === 'BUY' ? 'text-green-500' : 'text-red-500'}}">
+                                    ${{trade.side === 'BUY' ? '买入' : '卖出'}}
                                 </td>
                                 <td class="py-2">${{parseFloat(trade.price).toFixed(2)}}</td>
                                 <td class="py-2">${{parseFloat(trade.amount).toFixed(4)}}</td>
@@ -382,7 +401,7 @@ async def handle_log(request):
                     tbody.innerHTML = '';
                     (data.trades || []).slice(-10).forEach(trade => {{
                         const tr = document.createElement('tr');
-                        tr.innerHTML = `<td>${trade.timestamp}</td><td>${trade.side}</td><td>${parseFloat(trade.price).toFixed(2)}</td><td>${trade.amount}</td><td>${parseFloat(trade.cost).toFixed(2)}</td>`;
+                        tr.innerHTML = `<td>{{trade.timestamp}}</td><td>{{trade.side}}</td><td>{{parseFloat(trade.price).toFixed(2)}}</td><td>{{trade.amount}}</td><td>{{parseFloat(trade.cost).toFixed(2)}}</td>`;
                         tbody.appendChild(tr);
                     }});
                     // 资金曲线
@@ -402,7 +421,7 @@ async def handle_log(request):
                         const first = data.trades[0];
                         const last = data.trades[data.trades.length-1];
                         const profit = (parseFloat(last.price) - parseFloat(first.price)) * (parseFloat(last.amount) || 1);
-                        summary.textContent = `总成交: ${data.trades.length} | 简单收益: ${profit.toFixed(2)} USDT`;
+                        summary.textContent = `总成交: {{data.trades.length}} | 简单收益: {{profit.toFixed(2)}} USDT`;
                     }} else {{
                         summary.textContent = '无回测数据';
                     }}
@@ -437,7 +456,10 @@ async def handle_status(request):
         # 计算总资产
         bnb_balance = float(balance['total'].get('BNB', 0))
         usdt_balance = float(balance['total'].get('USDT', 0))
-        total_assets = usdt_balance + (bnb_balance * current_price)
+        # 理财账户联动：加上funding_balance中的USDT和BNB价值
+        fund_usdt = float(funding_balance.get('USDT', 0) or 0)
+        fund_bnb = float(funding_balance.get('BNB', 0) or 0)
+        total_assets = usdt_balance + fund_usdt + (bnb_balance + fund_bnb) * current_price
         
         # 计算总盈亏和盈亏率
         initial_principal = trader.config.INITIAL_PRINCIPAL
@@ -458,13 +480,26 @@ async def handle_status(request):
         trade_history = []
         if hasattr(trader, 'order_tracker'):
             trades = trader.order_tracker.get_trade_history()
-            trade_history = [{
-                'timestamp': datetime.fromtimestamp(trade['timestamp']).strftime('%Y-%m-%d %H:%M:%S'),
-                'side': trade.get('side', '--'),
-                'price': trade.get('price', 0),
-                'amount': trade.get('amount', 0),
-                'profit': trade.get('profit', 0)
-            } for trade in trades[-10:]]  # 只取最近10笔交易
+            for trade in trades[-10:]:
+                # 健壮性检查
+                if not isinstance(trade, dict):
+                    logging.warning(f"trade_history中存在非dict对象: {trade}")
+                    continue
+                required_fields = ['timestamp', 'side', 'price', 'amount', 'profit']
+                if not all(field in trade for field in required_fields):
+                    logging.warning(f"trade_history中trade缺少字段: {trade}")
+                    continue
+                try:
+                    trade_history.append({
+                        'timestamp': datetime.fromtimestamp(trade['timestamp']).strftime('%Y-%m-%d %H:%M:%S'),
+                        'side': trade.get('side', '--'),
+                        'price': trade.get('price', 0),
+                        'amount': trade.get('amount', 0),
+                        'profit': trade.get('profit', 0)
+                    })
+                except Exception as e:
+                    logging.warning(f"trade_history格式化trade异常: {trade}, error: {e}")
+                    continue
         
         # 计算目标委托金额 (总资产的10%)
         target_order_amount = await trader._calculate_order_amount('buy') # buy/sell 结果一样
@@ -495,7 +530,8 @@ async def handle_status(request):
             "profit_rate": profit_rate,
             "s1_daily_high": s1_high,
             "s1_daily_low": s1_low,
-            "position_percentage": position_percentage
+            "position_percentage": position_percentage,
+            "funding_balance": funding_balance # 新增理财账户余额
         }
         
         return web.json_response(status)

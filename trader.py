@@ -58,6 +58,18 @@ class GridTrader:
         }
         self.funding_cache_ttl = 60  # 理财余额缓存60秒
         self.position_controller_s1 = PositionControllerS1(self)
+        # sleep参数化
+        from mock_exchange_client import MockExchangeClient
+        if isinstance(self.exchange, MockExchangeClient):
+            self.sleep_interval_main_loop = 0
+            self.sleep_interval_order = 0
+            self.sleep_interval_fund = 0
+            self.sleep_interval_retry = 0
+        else:
+            self.sleep_interval_main_loop = 5
+            self.sleep_interval_order = 3
+            self.sleep_interval_fund = 2
+            self.sleep_interval_retry = 2
 
     async def initialize(self):
         if self.initialized:
@@ -290,7 +302,7 @@ class GridTrader:
                 # 获取当前价格
                 current_price = await self._get_latest_price()
                 if not current_price:
-                    await asyncio.sleep(5)
+                    await asyncio.sleep(self.sleep_interval_main_loop)
                     continue
                 self.current_price = current_price
 
@@ -308,7 +320,7 @@ class GridTrader:
                         
                         # 执行风控检查
                         if await self.risk_manager.multi_layer_check():
-                            await asyncio.sleep(5)
+                            await asyncio.sleep(self.sleep_interval_main_loop)
                             continue
 
                         # 执行S1策略
@@ -324,9 +336,18 @@ class GridTrader:
 
                 await asyncio.sleep(5)
 
+                # 回测模式推进K线
+                from mock_exchange_client import MockExchangeClient
+                if isinstance(self.exchange, MockExchangeClient):
+                    try:
+                        await self.exchange.next()
+                    except StopIteration:
+                        self.logger.info("回测已到末尾，主循环即将退出。")
+                        break
+
             except Exception as e:
                 self.logger.error(f"Main loop error: {e}", exc_info=True)
-                await asyncio.sleep(30)
+                await asyncio.sleep(self.sleep_interval_main_loop)
                 
     async def _check_signal_with_retry(self, check_func, check_name, max_retries=3, retry_delay=2):
         """带重试机制的信号检测函数
@@ -389,7 +410,7 @@ class GridTrader:
                     await self.exchange.transfer_to_spot(transfer['asset'], transfer['amount'])
                 self.logger.info("资金赎回完成")
                 # 等待资金到账
-                await asyncio.sleep(2)
+                await asyncio.sleep(self.sleep_interval_fund)
         except Exception as e:
             self.logger.error(f"资金检查和划转失败: {str(e)}")
 
@@ -433,7 +454,7 @@ class GridTrader:
                 if not order_book or not order_book.get('asks') or not order_book.get('bids'):
                     self.logger.error("获取订单簿数据失败或数据不完整")
                     retry_count += 1
-                    await asyncio.sleep(3)
+                    await asyncio.sleep(self.sleep_interval_order)
                     continue
 
                 # 使用买1/卖1价格
@@ -479,7 +500,7 @@ class GridTrader:
                 
                 # 等待指定时间后检查订单状态
                 self.logger.info(f"订单已提交，等待 {check_interval} 秒后检查状态")
-                await asyncio.sleep(check_interval)
+                await asyncio.sleep(self.sleep_interval_order)
                 
                 # 检查订单状态
                 updated_order = await self.exchange.fetch_order(order_id, self.config.SYMBOL)
@@ -599,7 +620,7 @@ class GridTrader:
                 # 如果还有重试次数，等待一秒后继续
                 if retry_count < max_retries:
                     self.logger.info(f"等待1秒后进行第 {retry_count + 1} 次尝试")
-                    await asyncio.sleep(1)
+                    await asyncio.sleep(self.sleep_interval_retry)
                 
             except Exception as e:
                 self.logger.error(f"执行{side}单失败: {str(e)}")
@@ -633,7 +654,7 @@ class GridTrader:
                 # 如果还有重试次数，稍等后继续
                 if retry_count < max_retries:
                     self.logger.info(f"等待2秒后进行第 {retry_count + 1} 次尝试")
-                    await asyncio.sleep(2)
+                    await asyncio.sleep(self.sleep_interval_retry)
         
         # 达到最大重试次数后仍未成功
         if retry_count >= max_retries:
@@ -664,7 +685,7 @@ class GridTrader:
                     return True
             
             self.logger.info(f"等待资金到账 ({i+1}/{max_attempts})...")
-            await asyncio.sleep(1)
+            await asyncio.sleep(self.sleep_interval_fund)
         
         raise Exception("等待资金到账超时")
 
@@ -759,7 +780,7 @@ class GridTrader:
             self.initialized = False  # 确保重置初始化状态
             
             # 等待新的交易所客户端就绪
-            await asyncio.sleep(2)
+            await asyncio.sleep(self.sleep_interval_fund)
             
             self.logger.info("系统重新初始化完成")
         except Exception as e:
@@ -815,7 +836,7 @@ class GridTrader:
                     self.logger.error(f"检查订单状态失败: {str(e)} | 订单ID: {order_id}")
                     # 如果是时间同步错误，等待一秒后继续
                     if "Timestamp for this request" in str(e):
-                        await asyncio.sleep(1)
+                        await asyncio.sleep(self.sleep_interval_retry)
                         continue
 
     async def adjust_grid_size(self):
@@ -1133,7 +1154,7 @@ class GridTrader:
                 self.logger.info(f"预划转完成: {transfer_amount} USDT | 剩余需划转: {required_with_buffer}")
                 
             self.logger.info("资金预划转完成，等待10秒确保到账")
-            await asyncio.sleep(10)  # 等待资金到账
+            await asyncio.sleep(self.sleep_interval_fund)  # 回测模式无延迟，实盘/模拟盘可自定义
             
         except Exception as e:
             self.logger.error(f"预划转失败: {str(e)}")
@@ -1487,7 +1508,7 @@ class GridTrader:
             await self.exchange.transfer_to_spot('USDT', needed_amount)
             
             # 等待资金到账
-            await asyncio.sleep(5)
+            await asyncio.sleep(self.sleep_interval_fund)
             
             # 再次检查余额
             new_balance = await self.exchange.fetch_balance({'type': 'spot'})
@@ -1566,7 +1587,7 @@ class GridTrader:
             await self.exchange.transfer_to_spot('BNB', needed_amount)
             
             # 等待资金到账
-            await asyncio.sleep(5)
+            await asyncio.sleep(self.sleep_interval_fund)
             
             # 再次检查余额
             new_balance = await self.exchange.fetch_balance({'type': 'spot'})

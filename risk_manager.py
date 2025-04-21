@@ -38,7 +38,7 @@ class AdvancedRiskManager:
 
     async def _get_position_value(self):
         balance = await self.trader.exchange.fetch_balance()
-        print(f"[DEBUG][risk_manager._get_position_value] balance: {balance}\nTraceback:\n{''.join(traceback.format_stack(limit=5))}")
+        # print(f"[DEBUG][risk_manager._get_position_value] balance: {balance}\nTraceback:\n{''.join(traceback.format_stack(limit=5))}")
         funding_balance = await self.trader.exchange.fetch_funding_balance()
         if not self.trader.symbol_info:
             self.trader.trade_log.error("交易对信息未初始化")
@@ -55,7 +55,7 @@ class AdvancedRiskManager:
         try:
             position_value = await self._get_position_value()
             balance = await self.trader.exchange.fetch_balance()
-            print(f"[DEBUG][risk_manager._get_position_ratio] balance: {balance}\nTraceback:\n{''.join(traceback.format_stack(limit=5))}")
+            # print(f"[DEBUG][risk_manager._get_position_ratio] balance: {balance}\nTraceback:\n{''.join(traceback.format_stack(limit=5))}")
             funding_balance = await self.trader.exchange.fetch_funding_balance()
             usdt_balance = (
                 float(balance.get('total', {}).get('USDT', 0)) +

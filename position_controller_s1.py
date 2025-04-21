@@ -173,8 +173,10 @@ class PositionControllerS1:
                      'side': side,
                      'price': float(order.get('average', current_price)), # 使用成交均价或市价
                      'amount': float(order.get('filled', adjusted_amount)), # 使用实际成交量
-                     'order_id': order.get('id')
-                     # 可以添加更多信息，如 cost, fee (如果API返回)
+                     'order_id': order.get('id'),
+                     'profit': 0, # S1调仓默认利润为0，后续可补充
+                     'cost': float(order.get('cost', 0)),
+                     'fee': float(order.get('fee', 0))
                  }
                  self.trader.order_tracker.add_trade(trade_info)
                  self.logger.info("S1: Trade logged in OrderTracker.")

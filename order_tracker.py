@@ -101,23 +101,39 @@ class OrderTracker:
             self.logger.error(f"备份交易历史失败: {str(e)}")
 
     def add_trade(self, trade):
-        """添加交易记录"""
+        """添加交易记录，自动补全缺失字段，保证结构一致"""
+        # 标准字段及默认值
+        standard_fields = {
+            'timestamp': 0,
+            'side': '',
+            'price': 0,
+            'amount': 0,
+            'profit': 0,
+            'order_id': '',
+            'cost': 0,
+            'fee': 0
+        }
+        # 自动补全缺失字段
+        for field, default in standard_fields.items():
+            if field not in trade:
+                trade[field] = default
         # 验证必要字段
         required_fields = ['timestamp', 'side', 'price', 'amount', 'order_id']
         for field in required_fields:
             if field not in trade:
                 self.logger.error(f"交易记录缺少必要字段: {field}")
                 return
-        
         # 验证数据类型
         try:
             trade['timestamp'] = float(trade['timestamp'])
             trade['price'] = float(trade['price'])
             trade['amount'] = float(trade['amount'])
+            trade['profit'] = float(trade.get('profit', 0))
+            trade['cost'] = float(trade.get('cost', 0))
+            trade['fee'] = float(trade.get('fee', 0))
         except (ValueError, TypeError) as e:
             self.logger.error(f"交易记录数据类型错误: {str(e)}")
             return
-        
         self.logger.info(f"添加交易记录: {trade}")
         self.trade_history.append(trade)
         if len(self.trade_history) > 100:

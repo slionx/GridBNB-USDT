@@ -16,6 +16,7 @@ class MockExchangeClient(IExchangeClient):
         self.orders = []  # 活跃订单
         self.trades = []  # 成交记录
         self.balance = initial_balance or {'USDT': 10000.0, 'BNB': 0.0}
+        self.savings_balance = {'USDT': 0.0, 'BNB': 0.0}  # 新增理财账户
         self.fee_rate = fee_rate
         self.slippage = slippage
         self.order_id_counter = 1
@@ -191,9 +192,35 @@ class MockExchangeClient(IExchangeClient):
                 writer.writerow(row)
         return True
 
+    async def transfer_to_savings(self, asset, amount):
+        # 现货转理财
+        asset = asset.upper()
+        if asset not in self.balance:
+            raise Exception(f"现货账户无{asset}")
+        if self.balance[asset] < amount:
+            raise Exception(f"现货{asset}余额不足，无法申购理财")
+        self.balance[asset] -= amount
+        self.savings_balance[asset] = self.savings_balance.get(asset, 0.0) + amount
+        # 日志
+        print(f"[Mock] 申购理财: {amount} {asset}，现货余额: {self.balance[asset]:.8f}，理财余额: {self.savings_balance[asset]:.8f}")
+        return True
+
+    async def transfer_to_spot(self, asset, amount):
+        # 理财转现货
+        asset = asset.upper()
+        if asset not in self.savings_balance:
+            raise Exception(f"理财账户无{asset}")
+        if self.savings_balance[asset] < amount:
+            raise Exception(f"理财{asset}余额不足，无法赎回")
+        self.savings_balance[asset] -= amount
+        self.balance[asset] = self.balance.get(asset, 0.0) + amount
+        # 日志
+        print(f"[Mock] 赎回理财: {amount} {asset}，现货余额: {self.balance[asset]:.8f}，理财余额: {self.savings_balance[asset]:.8f}")
+        return True
+
     async def fetch_funding_balance(self):
-        # 回测模式下无理财账户，返回空结构
-        return {}
+        # 回测模式下理财账户余额
+        return self.savings_balance.copy()
 
     @property
     def exchange(self):
@@ -209,4 +236,55 @@ class MockExchangeClient(IExchangeClient):
 
     def _sync_base_quote(self):
         self.balance['base'] = self.balance.get(self.base, 0)
-        self.balance['quote'] = self.balance.get(self.quote, 0) 
+        self.balance['quote'] = self.balance.get(self.quote, 0)
+
+    async def create_market_order(self, symbol: str, side: str, amount: float, params: Optional[dict] = None):
+        """
+        回测环境下的市价单实现，直接用当前K线收盘价模拟成交。
+        兼容S1策略和主流程的市价单调用。
+        """
+        # 获取当前K线收盘价
+        k = self.kline_data[self.kline_index]
+        price = k[4]
+        # 调用限价单接口实现市价单逻辑
+        return await self.create_order(symbol, type='market', side=side, amount=amount, price=price)
+
+    async def fetch_order(self, order_id, symbol, params=None):
+        # 在trades中查找order_id
+        for trade in self.trades:
+            if str(trade.get('order_id')) == str(order_id):
+                return {
+                    'id': order_id,
+                    'status': 'closed',
+                    'price': trade['price'],
+                    'filled': trade['amount'],
+                    'side': trade['side']
+                }
+        # 未找到则返回canceled
+        return {
+            'id': order_id,
+            'status': 'canceled',
+            'price': None,
+            'filled': 0,
+            'side': None
+        }
+
+    async def cancel_order(self, order_id, symbol, params=None):
+        # 检查是否已成交
+        for trade in self.trades:
+            if str(trade.get('order_id')) == str(order_id):
+                return {
+                    'id': order_id,
+                    'status': 'closed',
+                    'price': trade['price'],
+                    'filled': trade['amount'],
+                    'side': trade['side']
+                }
+        # 未找到则视为已取消
+        return {
+            'id': order_id,
+            'status': 'canceled',
+            'price': None,
+            'filled': 0,
+            'side': None
+        } 
