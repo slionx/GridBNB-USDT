@@ -65,12 +65,15 @@ class GridTrader:
             self.sleep_interval_order = 0
             self.sleep_interval_fund = 0
             self.sleep_interval_retry = 0
+            self.sleep_load_markets = 0
+            self.sleep_retry_count = 0
         else:
             self.sleep_interval_main_loop = 5
             self.sleep_interval_order = 3
             self.sleep_interval_fund = 2
             self.sleep_interval_retry = 2
-
+            self.sleep_load_markets = 1
+            self.sleep_retry_count = 2
     async def initialize(self):
         if self.initialized:
             return
@@ -82,13 +85,13 @@ class GridTrader:
             while not self.exchange.markets_loaded and retry_count < 3:
                 try:
                     await self.exchange.load_markets()
-                    await asyncio.sleep(1)
+                    await asyncio.sleep(self.sleep_load_markets)
                 except Exception as e:
                     self.logger.warning(f"加载市场数据失败: {str(e)}")
                     retry_count += 1
                     if retry_count >= 3:
                         raise
-                    await asyncio.sleep(2)
+                    await asyncio.sleep(self.sleep_retry_count)
             
             # 检查现货账户资金并划转
             await self._check_and_transfer_initial_funds()
@@ -334,13 +337,23 @@ class GridTrader:
                             await self.adjust_grid_size()
                             self.last_grid_adjust_time = time.time()
 
-                await asyncio.sleep(5)
+                await asyncio.sleep(self.sleep_interval_main_loop)
 
                 # 回测模式推进K线
                 from mock_exchange_client import MockExchangeClient
                 if isinstance(self.exchange, MockExchangeClient):
                     try:
                         await self.exchange.next()
+                        # 新增：推进K线后立即打印当前总资产
+                        balance = await self.exchange.fetch_balance()
+                        funding_balance = await self.exchange.fetch_funding_balance()
+                        current_price = await self._get_latest_price()
+                        usdt = float(balance['total'].get('USDT', 0)) + float(funding_balance.get('USDT', 0))
+                        bnb = float(balance['total'].get('BNB', 0)) + float(funding_balance.get('BNB', 0))
+                        total = usdt + bnb * current_price
+                        initial = self.config.INITIAL_PRINCIPAL
+                        profit = total - initial if initial > 0 else 0
+                        print(f"当前总资产: {total:.2f} USDT，初始本金: {initial:.2f}，总盈亏: {profit:.2f} USDT")
                     except StopIteration:
                         self.logger.info("回测已到末尾，主循环即将退出。")
                         break
@@ -1645,3 +1658,41 @@ class GridTrader:
         except Exception as e:
             self.logger.error(f"执行交易失败: {str(e)}")
             raise
+
+    async def step_once(self):
+        if not self.initialized:
+            await self.initialize()
+            await self.position_controller_s1.update_daily_s1_levels()
+
+        # 保留S1水平更新
+        await self.position_controller_s1.update_daily_s1_levels()
+
+        # 获取当前价格
+        current_price = await self._get_latest_price()
+        if not current_price:
+            return  # 跳过本轮
+        self.current_price = current_price
+
+        # 优先检查买入卖出信号，不执行风控检查
+        sell_signal = await self._check_signal_with_retry(self._check_sell_signal, "卖出检测")
+        if sell_signal:
+            await self.execute_order('sell')
+        else:
+            buy_signal = await self._check_signal_with_retry(self._check_buy_signal, "买入检测")
+            if buy_signal:
+                await self.execute_order('buy')
+            else:
+                # 只有在没有交易信号时才执行其他操作
+                # 执行风控检查
+                if await self.risk_manager.multi_layer_check():
+                    return
+                # 执行S1策略
+                await self.position_controller_s1.check_and_execute()
+                # 调整网格大小
+                adjust_interval_hours = self.config.GRID_PARAMS.get('adjust_interval', 24)
+                adjust_interval_seconds = adjust_interval_hours * 3600
+                if time.time() - self.last_grid_adjust_time > adjust_interval_seconds:
+                    self.logger.info(f"时间到了，准备调整网格大小 (间隔: {adjust_interval_hours} 小时).")
+                    await self.adjust_grid_size()
+                    self.last_grid_adjust_time = time.time()
+        # 不推进K线，不循环，由主进程控制推进

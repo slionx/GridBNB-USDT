@@ -47,6 +47,11 @@ def format_trade_message(side, symbol, price, amount, total, grid_size, retry_co
     return message
 
 def send_pushplus_message(content, title="交易信号通知"):
+
+    #如果回测模式，不发送推送
+    if os.getenv('BACKTEST_MODE'):
+        return
+
     if not PUSHPLUS_TOKEN:
         logging.error("未配置PUSHPLUS_TOKEN，无法发送通知")
         return

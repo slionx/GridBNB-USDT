@@ -87,7 +87,6 @@ celerybeat-schedule
 *.sage.py
 
 # Environments
-.env
 # 但不排除示例环境文件
 !.env.example
 .venv

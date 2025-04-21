@@ -28,11 +28,11 @@ def parse_args():
     parser.add_argument('--kline', type=str, default=None, help='回测K线数据文件路径')
     parser.add_argument('--init-usdt', type=float, default=None, help='初始USDT资金')
     parser.add_argument('--init-bnb', type=float, default=None, help='初始BNB资金')
+    parser.add_argument('--fast-backtest', action='store_true', help='极速回测模式（不启动Web/日志，仅输出总盈亏）')
     return parser.parse_args()
 
 async def main():
     args = parse_args()
-    # 优先命令行，其次环境变量，最后默认
     mode = args.mode or os.getenv('TRADING_MODE', 'live')
     mode = mode.lower()
     initial_balance = None
@@ -41,56 +41,52 @@ async def main():
             'USDT': args.init_usdt if args.init_usdt is not None else 10000.0,
             'BNB': args.init_bnb if args.init_bnb is not None else 0.0
         }
+    # 极速回测模式：日志级别ERROR，不启动Web
+    fast_backtest = getattr(args, 'fast_backtest', False)
+    if fast_backtest:
+        logging.basicConfig(level=logging.ERROR)
     # 选择交易所实现
     if mode == 'backtest':
         kline_path = args.kline or os.getenv('BACKTEST_KLINE_PATH')
         if not kline_path:
             print('回测模式需指定K线数据文件路径 --kline')
             sys.exit(1)
-        exchange: IExchangeClient = MockExchangeClient(kline_path, initial_balance=initial_balance)
+        exchange = MockExchangeClient(kline_path, initial_balance=initial_balance)
         print('已启用回测模式')
-    elif mode == 'simulate':
-        exchange: IExchangeClient = SimulateExchangeClient(initial_balance=initial_balance)
-        print('已启用模拟盘模式')
     else:
-        exchange: IExchangeClient = ExchangeClient()
-        print('已启用实盘模式')
+        print('极速回测仅支持backtest模式')
+        sys.exit(1)
     config = TradingConfig()
-    
-    try:
-        # 初始化统一日志配置
-        LogConfig.setup_logger()
-        logging.info("="*50)
-        logging.info("网格交易系统启动")
-        logging.info("="*50)
-        
-        # 使用正确的参数初始化交易器
-        trader = GridTrader(exchange, config)
-        
-        # 初始化交易器
+    trader = GridTrader(exchange, config)
+    # 极速回测主循环
+    async def fast_backtest_main():
         await trader.initialize()
-        
-        # 启动Web服务器
-        web_server_task = asyncio.create_task(start_web_server(trader))
-        
-        # 启动交易循环
-        trading_task = asyncio.create_task(trader.main_loop())
-        
-        # 等待所有任务完成
-        await asyncio.gather(web_server_task, trading_task)
-        
-    except Exception as e:
-        error_msg = f"启动失败: {str(e)}\n{traceback.format_exc()}"
-        logging.error(error_msg)
-        send_pushplus_message(error_msg, "致命错误")
-        
-    finally:
-        if 'trader' in locals():
-            try:
-                await trader.exchange.close()
-                logging.info("交易所连接已关闭")
-            except Exception as e:
-                logging.error(f"关闭连接时发生错误: {str(e)}")
+        kline_len = len(exchange.kline_data)
+        try:
+            for _ in range(kline_len - 1):  # 每次推进一根K线
+                await trader.step_once()
+                try:
+                    await exchange.next()
+                except StopIteration:
+                    break
+                # 打印总资产（由trader.py主循环内已实现，可选保留此处）
+        except Exception as e:
+            print(f"主循环异常退出: {e}")
+        # 回测结束后输出总盈亏
+        balance = await trader.exchange.fetch_balance()
+        funding_balance = await trader.exchange.fetch_funding_balance()
+        current_price = await trader._get_latest_price()
+        usdt = float(balance['total'].get('USDT', 0)) + float(funding_balance.get('USDT', 0))
+        bnb = float(balance['total'].get('BNB', 0)) + float(funding_balance.get('BNB', 0))
+        total = usdt + bnb * current_price
+        initial = config.INITIAL_PRINCIPAL
+        profit = total - initial if initial > 0 else 0
+        print(f"回测结束，总资产: {total:.2f} USDT，初始本金: {initial:.2f}，总盈亏: {profit:.2f} USDT")
+    if fast_backtest:
+        await fast_backtest_main()
+    else:
+        # 原有流程（含Web服务等）
+        await asyncio.gather(trader.main_loop(), start_web_server(trader))
 
 if __name__ == "__main__":
     asyncio.run(main()) 
